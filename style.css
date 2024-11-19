@@ -1,0 +1,130 @@
+/* Base Styles */
+body {
+    font-family: 'Comfortaa', sans-serif;
+    font-weight: 700; /*bold*/
+    margin: 0;
+    padding: 0;
+    color: #5D3F30;
+  }
+  
+  header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 10px 20px;
+    background-color: #f8dfd0;
+  }
+  
+  .intro {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+
+.intro img {
+    margin-right: 100px;
+}
+
+  .logo {
+    font-size: 1.5em;
+    font-weight: bold;
+    color: #d36d36;
+  }
+  
+  .menu-button, .cart-icon {
+    font-size: 1.5em;
+    background: none;
+    border: none;
+    cursor: pointer;
+  }
+  
+  main {
+    padding: 20px;
+  }
+  
+  h1 {
+    color: #FF6F61;
+    font-size: 72px;
+    text-align: right;
+    font-weight: bold;
+  }
+  h2 {
+    color: #FF6F61;
+    font-size: 30px;
+    text-align: center;
+    font-weight: bold;
+  }
+  h3 {
+    color: #D95757;
+    font-size: 30px;
+    text-align: left;
+    font-weight: bold;
+  }
+  .btn {
+    display: inline-block;
+    padding: 15px 30px;
+    background-color: #FFB947;
+    color: #5D3F30;
+    font-size: 18px;
+    border-radius: 30px;
+    border: 2px solid #5D3F30;
+    text-decoration: none;
+    align-self: center;
+  }
+  .btn:hover {
+    border-color: #FF6F61; /* Changes the border color when hovering */
+    color: #FF6F61; /* Changes the text color when hovering */
+  }
+  
+  .product-list {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 20px;
+  }
+  
+  .product-list .product-card {
+    flex: 1 1 calc(50% - 20px); /* Adjust for mobile */
+    background: #fff;
+    border: 1px solid #ddd;
+    border-radius: 5px;
+    padding: 10px;
+    text-align: center;
+  }
+  
+  footer {
+    text-align: center;
+    padding: 10px 20px;
+    background-color: #f8dfd0;
+  }
+  
+  /* Responsive for Mobile */
+  @media (max-width: 768px) {
+    body {
+      font-size: 14px;
+    }
+  
+    header {
+      flex-direction: column;
+      align-items: flex-start;
+    }
+  
+    .menu-button {
+      align-self: flex-end;
+    }
+  
+    .product-list .product-card {
+      flex: 1 1 100%; /* Full width on mobile */
+    }
+  }
+  
+  /* Responsive for Desktop */
+  @media (min-width: 769px) {
+    body {
+      font-size: 16px;
+    }
+  
+    .product-list .product-card {
+      flex: 1 1 calc(25% - 20px); /* Adjust for desktop */
+    }
+  }
+  

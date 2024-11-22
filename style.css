@@ -1,130 +1,416 @@
-/* Base Styles */
-body {
-    font-family: 'Comfortaa', sans-serif;
-    font-weight: 700; /*bold*/
-    margin: 0;
-    padding: 0;
-    color: #5D3F30;
-  }
-  
-  header {
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    padding: 10px 20px;
-    background-color: #f8dfd0;
-  }
-  
-  .intro {
-    display: flex;
-    align-items: center;
-    justify-content: center;
-  }
-
-.intro img {
-    margin-right: 100px;
+/* General */
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
 }
 
+body {
+  font-family: 'Comfortaa', sans-serif;
+  line-height: 1.6;
+  color: #5D3F30;
+  font-weight: bold;
+  background-color: #FFFBE2;
+}
+
+h1, h2 {
+  font-family: 'Comfortaa', sans-serif;
+  font-weight: bold;
+  color: #ff6f61;
+}
+
+a {
+  text-decoration: none;
+  color: #ff6f61;
+}
+
+.container {
+  display: flex;
+  flex-direction: column;
+  max-width: 1200px;
+  width: 100%;
+  margin: 0 auto;
+  padding: 20px 20px;
+}
+
+/* Header */
+.header {
+  display: flex; 
+  justify-content: space-between;
+  align-items: center;
+  background-color: #FFECC3;
+  position: relative; 
+  height: 130px;
+}
+
+.logo {
+  max-height: 180px;
+  max-width: 300px;
+  height: auto;
+  width: auto;
+  transition: transform 0.3s ease; /* Smooth scaling effect */
+}
+
+/*prevent other parts of the space bar to be able to trigger the effect*/
+.logo-link {
+  display: block; /* Make the link a block element to control width */
+  width: 150px; /* Set a width for the logo container */
+  height: auto;
+}
+
+.logo-link:hover .logo {
+  transform: scale(1.1);     /* Slightly enlarge the logo on hover */
+}
+
+.cart-menu {
+  position: absolute;
+  top: 50px;
+  right: 40px;
+  display: flex; 
+  gap: 30px;
+  align-items: center;
+}
+
+.cart-icon, .menu-icon {
+  width: 30px;
+  height: 30px;
+  object-fit: contain; /* Prevents the image from stretching */
+  transition: transform 0.3s ease, filter 0.3s ease; /* Smooth hover effect */
+}
+
+.cart-icon-link:hover img, .menu-icon-link:hover img {
+  transform: scale(1.2); /* Slightly enlarge on hover */
+}
+
+/* Hero Section */
+.hero-section {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  padding: 20px 50px;
+}
+
+.split {
+  flex: 1 1 50%;
+  padding: 30px 70px;
+}
+
+.hero-image {
+  width: 100%; /* Make the image responsive */
+  height: auto;
+  border: 4px solid #E08556;
+  border-radius: 30px;
+  object-fit: cover; /* Crop if necessary to fill the space */
+}
+
+.hero-text {
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-end;
+  text-align: right;
+}
+
+.hero-text h1 {
+  font-size: 55px;
+  margin-bottom: 20px;
+  line-height: 70px;
+}
+
+.shop-now-button {
+  display: inline-block;
+  background-color: #FFB947; /* Button background color */
+  color: #5D3F30; /* Button text color */
+  padding: 0 30px; /* Horizontal padding for consistent width */
+  font-size: 18px; /* Font size for text */
+  border-radius: 50px; /* Creates the rounded shape */
+  border: 3px solid #5D3F30; /* Border around the button */
+  cursor: pointer;
+  text-align: center; /* Align text */
+  height: 60px; /* Fixed height */
+  line-height: 55px; /* Vertically center text */
+  margin-top: 30px; /* Margin for spacing */
+  align-self: flex-end; /* Align button to the end of its container */
+  min-width: 180px; /* Prevent button from shrinking too much */
+  transition: transform 0.3s ease, filter 0.3s ease; /* Smooth hover effect */
+}
+
+.shop-now-button:hover {
+  color: #ff6f61;              /* Change the text color */
+  border-color:#FFB947;        /* Change the border color */
+  transform: scale(1.1);        /* Slightly enlarge the button */
+}
+
+/* Bestsellers Section */
+.heading-container {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
+  margin-top: 50px;
+}
+
+.heading-container h2 {
+  font-size: 40px;
+  margin-bottom: 50px;
+  text-align: center;
+}
+
+.products-container {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: 30px;
+  margin-top: 30px;
+}
+
+.product-card {
+  display: flex;
+  flex-direction: column;
+  text-align: left;
+  width: 250px;
+  height: auto;
+}
+
+.product-image {
+  width: 100%; /* Ensure the image takes up the full width of the container */
+  height: 200px;
+  background-color: #ddd;
+}
+
+.product-name {
+  font-weight: bold;
+  text-align: left;
+  margin-top: 10px;
+}
+
+.product-price {
+  color: #777;
+  font-family: 'Nunito', sans-serif;
+  font-weight: bold;
+}
+
+/* Story Section */
+.about-section {
+  display: flex;
+  flex-direction: column;
+  padding: 60px 0px;
+}
+
+.story-container {
+  padding: 0px 0px;  /* Padding for the section */
+}
+
+.story-heading-container h2 {
+  font-size: 40px;
+  margin-bottom: 20px;  /* Space below the heading */
+  text-align: left;   /* Center the heading */
+  padding-left: 40px;
+}
+
+.story-container {
+  display: flex;               /* Align items horizontally */
+}
+
+.split {
+  flex: 1; /* Allow the content to grow */
+  padding: 20px 40px; /* Padding around the content */
+}
+
+.story-image {
+  width: 100%; /* Make the image responsive */                
+  max-width: 500px; /* Limit the image width */
+  height: auto; /* Fixed height for image */
+  border-radius: 10px; 
+  object-fit: cover; /* Crop if necessary to fill the space */
+}
+
+.story-text {
+  font-size: 16px;         
+  text-align: left;
+  padding: 40px 0px;
+  line-height: 1.8;
+}
+
+/* Footer */
+.footer {
+  background-color: #FFECC3;  /* Light yellow background */
+  padding: 30px 0;
+  text-align: center;
+}
+
+/* Container for all content inside the footer */
+.footer .container {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 20px;
+}
+
+/* Styling for the footer links */
+.footer-links ul {
+  list-style: none;
+  padding: 0;
+  display: flex;
+  gap: 15px;
+}
+
+.footer-links li {
+  display: inline-block;
+}
+
+.footer-links a {
+  text-decoration: none;
+  font-size: 14px;
+  color: #5D3F30;
+}
+
+.footer-links a:hover {
+  color: #ff6f61
+}
+
+/* Styling for the footer contact information */
+.footer-contact ul {
+  list-style: none;
+  padding: 0;
+  display: flex; 
+  gap: 10px;
+}
+
+.footer-contact li {
+  font-size: 14px;
+}
+
+.footer-contact a {
+  text-decoration: none;
+  color: #5D3F30;
+}
+
+.footer-contact a:hover {
+  color: #ff6f61
+}
+
+/* Styling for the social icons */
+.footer-social {
+  display: flex;
+  gap: 50px;
+}
+
+.social-icon img {
+  width: 20px;
+  height: 20px;
+  transition: transform 0.3s ease, filter 0.3s ease; /* Smooth hover effect */
+}
+
+.social-icon img:hover {
+  transform: scale(1.2); /* Slightly enlarge on hover */
+}
+
+
+
+
+/* Responsive */
+@media (max-width: 768px) {
+  .container {
+    flex-direction: column;
+    padding: 50px, 10px;
+  }
+
+  /* Header */
+  .header {
+    height: 100px; /* Adjust header height */
+  }
+
   .logo {
-    font-size: 1.5em;
-    font-weight: bold;
-    color: #d36d36;
+    display: block;            /* Ensures proper block layout */
+    max-height: 150px;         /* Adjust the height */
+    max-width: 200px;          /* Adjust the width */
+  }
+
+  .cart-menu {
+    display: flex;        /* Align items horizontally */
+    gap: 25px;            /* Space between cart and menu icons */
+    right: 20px;          /* Distance from the right edge */
+    bottom: 60px;         /* Distance from the bottom edge */
   }
   
-  .menu-button, .cart-icon {
-    font-size: 1.5em;
-    background: none;
-    border: none;
-    cursor: pointer;
+  .cart-icon, .menu-icon {
+    width: 25px;          /* Set icon width */
+    height: 25px;         /* Set icon height */
   }
   
-  main {
-    padding: 20px;
+
+  /* Hero Section */
+  .split {
+      flex-basis: 100%;
+      padding: 20px 0px;
   }
-  
-  h1 {
-    color: #FF6F61;
-    font-size: 72px;
+
+  .hero-image {
+    align-items: center;
+  }
+
+  .hero-text h1 {
+    font-size: 40px;
     text-align: right;
-    font-weight: bold;
+    line-height: 60px;
+    margin-bottom: 0px;
   }
-  h2 {
-    color: #FF6F61;
+
+  /* Bestsellers Section */
+  .product-card {
+    width: 45%;
+    height: auto;
+  }
+
+  .heading-container h2 {
+    font-size: 30px;
+    margin-bottom: 0px;
+  }
+
+  /* Story Section */
+  .about-section{
+    flex-direction: column; /* Stacks elements vertically */
+  }
+
+  .story-heading-container h2 {
     font-size: 30px;
     text-align: center;
-    font-weight: bold;
   }
-  h3 {
-    color: #D95757;
-    font-size: 30px;
-    text-align: left;
-    font-weight: bold;
+
+  .story-container {
+    flex-direction: column; /* Stacks elements vertically */
+    align-items: center; /* Center-align content */
   }
-  .btn {
-    display: inline-block;
-    padding: 15px 30px;
-    background-color: #FFB947;
-    color: #5D3F30;
-    font-size: 18px;
-    border-radius: 30px;
-    border: 2px solid #5D3F30;
-    text-decoration: none;
-    align-self: center;
-  }
-  .btn:hover {
-    border-color: #FF6F61; /* Changes the border color when hovering */
-    color: #FF6F61; /* Changes the text color when hovering */
+
+  .story-image {
+    height: 300px; /* Set a fixed height */
+    width: 100%; /* Allow the width to adjust to the container */
   }
   
-  .product-list {
-    display: flex;
-    flex-wrap: wrap;
+  .story-text {
+    padding: 0px; /* Adjust padding */
+    text-align: center; /* Center-align text for mobile */
+  }
+
+  /* Footer */
+  .footer .container {
+    flex-direction: column;
+  }
+
+  .footer-links ul {
+    flex-direction: column;
+  }
+
+  .footer-contact ul {
+    flex-direction: column;
+  }
+
+  .footer-social {
     gap: 20px;
   }
-  
-  .product-list .product-card {
-    flex: 1 1 calc(50% - 20px); /* Adjust for mobile */
-    background: #fff;
-    border: 1px solid #ddd;
-    border-radius: 5px;
-    padding: 10px;
-    text-align: center;
+
+  .footer-social .social-icon img {
+    width: 16px;
+    height: 16px;
   }
-  
-  footer {
-    text-align: center;
-    padding: 10px 20px;
-    background-color: #f8dfd0;
-  }
-  
-  /* Responsive for Mobile */
-  @media (max-width: 768px) {
-    body {
-      font-size: 14px;
-    }
-  
-    header {
-      flex-direction: column;
-      align-items: flex-start;
-    }
-  
-    .menu-button {
-      align-self: flex-end;
-    }
-  
-    .product-list .product-card {
-      flex: 1 1 100%; /* Full width on mobile */
-    }
-  }
-  
-  /* Responsive for Desktop */
-  @media (min-width: 769px) {
-    body {
-      font-size: 16px;
-    }
-  
-    .product-list .product-card {
-      flex: 1 1 calc(25% - 20px); /* Adjust for desktop */
-    }
-  }
-  
+}

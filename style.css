@@ -21,16 +21,22 @@ h1, h2 {
 
 a {
   text-decoration: none;
-  color: #ff6f61;
+  color: #5D3F30;
 }
+
+html {
+  scroll-behavior: smooth;
+}
+
 
 .container {
   display: flex;
   flex-direction: column;
+  justify-content: center;
   max-width: 1200px;
   width: 100%;
   margin: 0 auto;
-  padding: 20px 20px;
+  padding: 50px 20px;
 }
 
 /* Header */
@@ -82,16 +88,70 @@ a {
   transform: scale(1.2); /* Slightly enlarge on hover */
 }
 
+/* Dropdown Container */
+.menu-dropdown {
+  position: relative;
+  display: inline-block;
+}
+
+/* Menu Icon */
+.menu-icon {
+  width: 30px;
+  height: 30px;
+  cursor: pointer;
+}
+
+/* Dropdown Content */
+.dropdown-content {
+  display: none; /* Hidden by default */
+  text-align: right; /* Align text to the left */
+  position: absolute;
+  top: 35px; /* Position below the menu icon */
+  right: 0;
+  background-color: #ff6f61; /* Match the coral-like background color */
+  border-radius: 20px; /* Rounded corners */
+  padding: 15px 35px; /* Padding for inner spacing */
+  width: 190px; /* Fixed width */
+  z-index: 10; /* Ensure the dropdown is on top of other elements */
+  transition: opacity 0.3s ease, visibility 0s 0.3s ease; /* Smooth transition for visibility */
+}
+
+/* Dropdown Links */
+.dropdown-content a {
+  display: block; /* Stack links vertically */
+  color: #FFFBE2; /* Match the light yellow text color */
+  text-decoration: none; /* Remove underline */
+  padding: 10px 15px; /* Add vertical spacing between links */
+  border-bottom: 1px solid #F9E2B1; /* Add a subtle divider line */
+}
+
+/* Remove divider for the last link */
+.dropdown-content a:last-child {
+  border-bottom: none;
+}
+
+/* Hover Effects for Links */
+.dropdown-content a:hover {
+  color: #FFB947;
+}
+
+/* Show Dropdown on Hover */
+.menu-dropdown:hover .dropdown-content {
+  display: block;
+  padding: 20px 25px; /* Increase hitbox */
+}
+
 /* Hero Section */
-.hero-section {
+.hero-section .container {
   display: flex;
   flex-wrap: wrap;
   align-items: center;
   padding: 20px 50px;
+  flex-direction: row;
 }
 
 .split {
-  flex: 1 1 50%;
+  flex: 1 1 50%; /* Equal width for both columns */
   padding: 30px 70px;
 }
 
@@ -135,7 +195,6 @@ a {
 }
 
 .shop-now-button:hover {
-  color: #ff6f61;              /* Change the text color */
   border-color:#FFB947;        /* Change the border color */
   transform: scale(1.1);        /* Slightly enlarge the button */
 }
@@ -151,16 +210,15 @@ a {
 
 .heading-container h2 {
   font-size: 40px;
-  margin-bottom: 50px;
   text-align: center;
 }
 
 .products-container {
   display: flex;
   flex-wrap: wrap;
-  justify-content: center;
-  gap: 30px;
   margin-top: 30px;
+  gap: 20px;
+  justify-content: center;
 }
 
 .product-card {
@@ -169,12 +227,20 @@ a {
   text-align: left;
   width: 250px;
   height: auto;
+  cursor: pointer;
+  transition: transform 0.3s ease; /* Smooth transition on hover */
 }
 
 .product-image {
   width: 100%; /* Ensure the image takes up the full width of the container */
-  height: 200px;
-  background-color: #ddd;
+  height: 250px; /* Fixed height for the image */
+  object-fit: cover; /* Crop if necessary to fill the space */
+  transition: transform 0.3s ease; /* Smooth transition for the zoom effect */
+}
+
+.product-image:hover {
+  transform: scale(1.05);
+  box-shadow: 0 2px 20px rgba(0, 0, 0, 0.2);
 }
 
 .product-name {
@@ -183,11 +249,20 @@ a {
   margin-top: 10px;
 }
 
-.product-price {
+.product-subname {
+  font-size: 14px;
   color: #777;
+}
+
+.product-price {
+  color: #ff6f61;
   font-family: 'Nunito', sans-serif;
   font-weight: bold;
+  margin-top: 10px;
+  font-size: 16px;
 }
+
+
 
 /* Story Section */
 .about-section {
@@ -312,7 +387,7 @@ a {
 @media (max-width: 768px) {
   .container {
     flex-direction: column;
-    padding: 50px, 10px;
+    padding: 40px 10px;
   }
 
   /* Header */
@@ -340,6 +415,10 @@ a {
   
 
   /* Hero Section */
+  .hero-section {
+    padding: 20px 20px;
+  }
+
   .split {
       flex-basis: 100%;
       padding: 20px 0px;
@@ -357,14 +436,30 @@ a {
   }
 
   /* Bestsellers Section */
+  .heading-container h2 {
+    font-size: 30px;
+  }
+
+  .products-container {
+    gap: 15px;
+    justify-content: center;
+  }
+
   .product-card {
     width: 45%;
     height: auto;
   }
 
-  .heading-container h2 {
-    font-size: 30px;
-    margin-bottom: 0px;
+  .product-image {
+    height: auto;
+  }
+
+  .product-name .product-price{
+    font-size: 14px;
+  }
+
+  .product-subname {
+    font-size: 12px;
   }
 
   /* Story Section */
@@ -395,6 +490,7 @@ a {
   /* Footer */
   .footer .container {
     flex-direction: column;
+    padding: 40px 10px;
   }
 
   .footer-links ul {

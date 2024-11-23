@@ -4,7 +4,7 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Hooked on Yarn</title>
+  <title>Hooked on Loops</title>
   <link href="https://fonts.googleapis.com/css2?family=Comfortaa:wght@400;700&family=Nunito:wght@400;700&display=swap"
     rel="stylesheet">
   <link rel="stylesheet" href="style.css">
@@ -18,18 +18,33 @@
       <a href="homepage.html" class="logo-link">
         <img src="logo.png" alt="Logo" class="logo">
       </a>      
+
       <div class="cart-menu">
-        <!-- Cart Icon -->
         <a href="cart.html" class="cart-icon-link">
           <img src="cart icon.png" alt="Cart" class="cart-icon">
         </a>
       
-        <!-- Menu Icon -->
-        <a href="menu.html" class="menu-icon-link">
-          <img src="menu icon.png" alt="Menu" class="menu-icon">
-        </a>
+        <div class="menu-dropdown">
+          <!-- Menu Icon -->
+          <a href="#" class="menu-icon-link">
+            <img src="menu icon.png" alt="Menu" class="menu-icon">
+          </a>
+
+          <div class="dropdown-content">
+            <a href="homepage.html">home</a>
+            <a href="shop-all.html">shop all</a>
+            <a href="bestsellers.html">bestsellers</a>
+            <a href="scrunchies.html" class="active">scrunchies</a>
+            <a href="keychains.html">keychains</a>
+            <a href="bouquets.html">bouquets</a>
+            <a href="our-story.html">our story</a>
+            <a href="#contact-us">contact us</a>
+
+          </div>
+        </div>
+
       </div>
-      
+
     </div>
   </header>
 
@@ -37,17 +52,19 @@
   <main>
     <!-- Hero Section -->
     <section class="hero-section">
-      <div class="container"></div>
-      <div class="split">
-        <img src="crochet gif.gif" alt="crochet.gif" class="hero-image">
-      </div>
+      <div class="container">
 
-      <div class="split">
-        <div class="hero-text">
-          <h1>from our <br>hook to <br>your <span class="heart">heart.</span></h1>
-          <a href="#" class="shop-now-button">shop now</a>
+        <div class="split">
+          <img src="crochet gif.gif" alt="crochet.gif" class="hero-image">
         </div>
-      </div>
+
+        <div class="split">
+          <div class="hero-text">
+            <h1>from our <br>hook to <br>your <span class="heart">heart.</span></h1>
+            <a href="#" class="shop-now-button">shop now</a>
+          </div>
+        </div>
+
       </div>
     </section>
 
@@ -60,26 +77,43 @@
         </div>
 
         <div class="products-container">
+          
           <div class="product-card">
-            <div class="product-image"></div>
-            <p class="product-name">product name 1</p>
-            <p class="product-price">$51.00</p>
+            <a href="product1.html" class="product-link">
+              <img src="cute one.jpg" alt="story image"class="product-image">
+              <p class="product-name">cotton candy</p>
+              <p class="product-subname">scrunchie</p>
+              <p class="product-price">S$8.00</p>
+            </a>
           </div>
+        
           <div class="product-card">
-            <div class="product-image"></div>
-            <p class="product-name">product name 2</p>
-            <p class="product-price">$52.00</p>
+            <a href="product2.html" class="product-link">
+              <img src="flower keychain.jpg" alt="story image"class="product-image">
+              <p class="product-name">sunflower bouquet</p>
+              <p class="product-subname">keychain</p>
+              <p class="product-price">S$10.00</p>
+            </a>
           </div>
+          
           <div class="product-card">
-            <div class="product-image"></div>
-            <p class="product-name">product name 3</p>
-            <p class="product-price">$51.00</p>
+            <a href="product3.html" class="product-link">
+              <img src="yellow bouquet.jpg" alt="story image"class="product-image">
+              <p class="product-name">mellow yellow</p>
+              <p class="product-subname">bouquet</p>
+              <p class="product-price">S$54.00</p>
+            </a>
           </div>
-          <div class="product-card">
-            <div class="product-image"></div>
-            <p class="product-name">product name 4</p>
-            <p class="product-price">$54.00</p>
-          </div>
+          
+            <div class="product-card">
+              <a href="product4.html" class="product-link">
+                <img src="green flower scrunchie.jpg" alt="story image"class="product-image">
+                <p class="product-name">green pea</p>
+                <p class="product-subname">scrunchie</p>
+                <p class="product-price">S$6.00</p>
+              </a>
+            </div>
+          
         </div>
 
       </div>
@@ -116,7 +150,7 @@
   </main>
 
   <!-- Footer -->
-  <footer class="footer">
+  <footer class="footer" id="contact-us">
     <div class="container">
 
       <div class="footer-social">

@@ -1,8 +1,9 @@
+/*Normalize CSS*/
+@import url('normalize.css'); 
+
 /* General */
 * {
-  margin: 0;
-  padding: 0;
-  box-sizing: border-box;
+  box-sizing: border-box; 
 }
 
 body {
@@ -228,6 +229,7 @@ html {
   width: 250px;
   height: auto;
   cursor: pointer;
+  margin-bottom: 30px;
   transition: transform 0.3s ease; /* Smooth transition on hover */
 }
 
@@ -235,6 +237,7 @@ html {
   width: 100%; /* Ensure the image takes up the full width of the container */
   height: 250px; /* Fixed height for the image */
   object-fit: cover; /* Crop if necessary to fill the space */
+  border-radius: 5px; /* Rounded corners */
   transition: transform 0.3s ease; /* Smooth transition for the zoom effect */
 }
 
@@ -386,7 +389,6 @@ html {
 /* Responsive */
 @media (max-width: 768px) {
   .container {
-    flex-direction: column;
     padding: 40px 10px;
   }
 
@@ -396,7 +398,6 @@ html {
   }
 
   .logo {
-    display: block;            /* Ensures proper block layout */
     max-height: 150px;         /* Adjust the height */
     max-width: 200px;          /* Adjust the width */
   }
@@ -489,7 +490,6 @@ html {
 
   /* Footer */
   .footer .container {
-    flex-direction: column;
     padding: 40px 10px;
   }
 

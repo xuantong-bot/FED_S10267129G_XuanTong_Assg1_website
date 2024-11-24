@@ -142,37 +142,43 @@ html {
   padding: 20px 25px; /* Increase hitbox */
 }
 
-/*breadcrumb section*/
+/* Breadcrumb Section */
 .breadcrumb-container {
-  background-color: #FFF2D6;
-  padding: 10px;
+  background-color: #FFF2D6; /* Light background color */
+  padding: 10px 0; /* Add vertical padding */
 }
 
 .breadcrumb {
   font-size: 14px;
-  color: #d76d6d;
   display: flex;
   align-items: center;
+  list-style: none;
+  padding: 0px 20px;
+  margin: 0px;
 }
 
 .breadcrumb a {
   text-decoration: none;
   color: #D95757;
   font-weight: 600;
-  padding: 5px
+  padding: 5px;
 }
 
 .breadcrumb a:hover {
-  text-decoration: underline;
+  text-decoration: underline; /* Underline on hover */
 }
 
 .breadcrumb span {
-  padding: 0px 5px;
+  padding: 0 5px; /* Space between items */
+  color: #D95757; /* Use the same color for the separators */
 }
 
-.breadcrumb a:last-child {
-  color: #ff6f61;
+.breadcrumb .current-page {
+  color: #ff6f61; /* Highlight the current page */
+  font-weight: 600;
+  opacity: 0.7; /* Optional: slightly dim the current page for better contrast */
 }
+
 
 /* Hero Section */
 .hero-section .container {
@@ -250,7 +256,7 @@ html {
   display: flex;
   flex-wrap: wrap;
   gap: 40px;
-  justify-content: center;
+  justify-content: space-between;
 }
 
 .product-card {
@@ -260,27 +266,35 @@ html {
   width: 250px;
   height: auto;
   cursor: pointer;
-  margin-bottom: 30px;
-  transition: transform 0.3s ease; /* Smooth transition on hover */
+  overflow: hidden; /* Ensures the image stays within the box */
+}
+
+.product-image-container {
+  overflow: hidden;
+  width: 250px;
+  height: 250px;
+  border-radius: 5px; /* Rounded corners */
 }
 
 .product-image {
   width: 100%; /* Ensure the image takes up the full width of the container */
-  height: 250px; /* Fixed height for the image */
+  height: 100%; /* Fixed height for the image */
   object-fit: cover; /* Crop if necessary to fill the space */
-  border-radius: 5px; /* Rounded corners */
-  transition: transform 0.3s ease; /* Smooth transition for the zoom effect */
+  transition: transform 0.3s ease; /* Smooth zoom-in animation */
 }
 
-.product-image:hover {
-  transform: scale(1.05);
-  box-shadow: 0 2px 20px rgba(0, 0, 0, 0.2);
+.product-card:hover .product-image {
+  transform: scale(1.2); /* Zooms the image by 20% */
 }
 
 .product-name {
   font-weight: bold;
   text-align: left;
   margin-top: 10px;
+}
+
+.product-card:hover .product-name {
+  color: #ff6f61;
 }
 
 .product-subname {
@@ -292,7 +306,6 @@ html {
   color: #ff6f61;
   font-family: 'Nunito', sans-serif;
   font-weight: bold;
-  margin-top: 10px;
   font-size: 16px;
 }
 
@@ -358,9 +371,11 @@ html {
 /* Styling for the footer links */
 .footer-links ul {
   list-style: none;
-  padding: 0;
+  padding: 0px;
   display: flex;
   gap: 15px;
+  margin-top: 0px;
+  margin-bottom: 0px;
 }
 
 .footer-links li {
@@ -377,7 +392,6 @@ html {
   color: #ff6f61
 }
 
-/* Styling for the footer contact information */
 .footer-contact ul {
   list-style: none;
   padding: 0;
@@ -533,7 +547,7 @@ html {
   }
 
   .footer-social {
-    gap: 20px;
+    gap: 10px;
   }
 
   .footer-social .social-icon img {

@@ -142,6 +142,38 @@ html {
   padding: 20px 25px; /* Increase hitbox */
 }
 
+/*breadcrumb section*/
+.breadcrumb-container {
+  background-color: #FFF2D6;
+  padding: 10px;
+}
+
+.breadcrumb {
+  font-size: 14px;
+  color: #d76d6d;
+  display: flex;
+  align-items: center;
+}
+
+.breadcrumb a {
+  text-decoration: none;
+  color: #D95757;
+  font-weight: 600;
+  padding: 5px
+}
+
+.breadcrumb a:hover {
+  text-decoration: underline;
+}
+
+.breadcrumb span {
+  padding: 0px 5px;
+}
+
+.breadcrumb a:last-child {
+  color: #ff6f61;
+}
+
 /* Hero Section */
 .hero-section .container {
   display: flex;
@@ -206,19 +238,18 @@ html {
   justify-content: center;
   align-items: center;
   flex-direction: column;
-  margin-top: 50px;
 }
 
 .heading-container h2 {
   font-size: 40px;
   text-align: center;
+  padding: 50px 0px;
 }
 
 .products-container {
   display: flex;
   flex-wrap: wrap;
-  margin-top: 30px;
-  gap: 20px;
+  gap: 40px;
   justify-content: center;
 }
 
@@ -312,7 +343,7 @@ html {
 /* Footer */
 .footer {
   background-color: #FFECC3;  /* Light yellow background */
-  padding: 30px 0;
+  padding: 20px 0;
   text-align: center;
 }
 

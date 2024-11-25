@@ -47,14 +47,13 @@ html {
   align-items: center;
   background-color: #FFECC3;
   position: relative; 
-  height: 130px;
+  height: 100px;
 }
 
 .logo {
-  max-height: 180px;
-  max-width: 300px;
-  height: auto;
+  height: 45px;
   width: auto;
+  padding: 5px 0px;
   transition: transform 0.3s ease; /* Smooth scaling effect */
 }
 
@@ -66,26 +65,26 @@ html {
 }
 
 .logo-link:hover .logo {
-  transform: scale(1.1);     /* Slightly enlarge the logo on hover */
+  transform: scale(1.05);     /* Slightly enlarge the logo on hover */
 }
 
 .cart-menu {
   position: absolute;
-  top: 50px;
-  right: 40px;
+  top: 40px;
+  right: 60px;
   display: flex; 
-  gap: 30px;
+  gap: 50px;
   align-items: center;
 }
 
-.cart-icon, .menu-icon {
-  width: 30px;
-  height: 30px;
-  object-fit: contain; /* Prevents the image from stretching */
+.fa-solid.fa-bars, .fa-solid.fa-cart-shopping {
+  font-size: 20px;      /* Adjust the size of the menu icon */
+  cursor: pointer;
   transition: transform 0.3s ease, filter 0.3s ease; /* Smooth hover effect */
 }
 
-.cart-icon-link:hover img, .menu-icon-link:hover img {
+
+.fa-solid.fa-bars:hover, .fa-solid.fa-cart-shopping:hover  {
   transform: scale(1.2); /* Slightly enlarge on hover */
 }
 
@@ -93,21 +92,16 @@ html {
 .menu-dropdown {
   position: relative;
   display: inline-block;
-}
-
-/* Menu Icon */
-.menu-icon {
-  width: 30px;
-  height: 30px;
-  cursor: pointer;
+  padding: 10px 10px; /* Add padding around the icon */
 }
 
 /* Dropdown Content */
 .dropdown-content {
-  display: none; /* Hidden by default */
+  visibility: hidden; /* Hide by default using visibility */
+  opacity: 0; /* Make invisible */
   text-align: right; /* Align text to the left */
   position: absolute;
-  top: 35px; /* Position below the menu icon */
+  top: 40px; /* Position below the menu icon */
   right: 0;
   background-color: #ff6f61; /* Match the coral-like background color */
   border-radius: 20px; /* Rounded corners */
@@ -136,10 +130,10 @@ html {
   color: #FFB947;
 }
 
-/* Show Dropdown on Hover */
 .menu-dropdown:hover .dropdown-content {
-  display: block;
-  padding: 20px 25px; /* Increase hitbox */
+  visibility: visible; /* Show the dropdown */
+  opacity: 1; /* Make it visible */
+  padding: 20px 25px; /* Increase hitbox for smoother interaction */
 }
 
 /* Breadcrumb Section */
@@ -310,24 +304,31 @@ html {
 }
 
 /* Product details section */
+.product-details {
+  display: flex;
+  flex-direction: column;
+  gap: 40px;
+  margin-bottom: 90px;
+}
+
 .notification {
   background-color: #FFD2CB;
   padding: 5px 30px;
-  display: flex;
-  align-items: center;
+  display: none;
   border-radius: 30px;
   margin: 20px auto;
-  max-width: 800px;
+  width: 800px;
+  align-items: center;
+  margin-bottom: 50px;
 }
 
 .notification p {
   font-size: 14px;
-  margin-right: 320px;
+  text-align: left;
 }
 
-.bell-icon {
-  width: 20px;
-  height: 20px;
+.fa-regular.fa-bell {
+  font-size: 20px;
   object-fit: contain;
   margin-right: 10px;
 }
@@ -336,18 +337,20 @@ html {
   background-color: #FFB947;
   color: #5D3F30;
   border: 1.5px solid #5D3F30;
+  align-self: right;
   text-decoration: none;
-  padding: 8px 12px;
+  padding: 5px 20px;
   border-radius: 20px;
   font-size: 14px;
   font-weight: bold;
   cursor: pointer;
+  margin-left: auto;
   transition: transform 0.3s ease, border-color 0.3s ease;
 }
 
 .view-cart-button:hover {
   border-color: #FFB947;
-  transform: scale(1.1);
+  transform: scale(1.05);
 }
 
 /* Container for left and right sections */
@@ -355,6 +358,8 @@ html {
   display: flex;
   gap: 40px;
   align-items: flex-start;
+  justify-content: center;
+  gap: 70px;
 }
 
 /* Left Section (Carousel) */
@@ -364,11 +369,16 @@ html {
   height: 400px;
   overflow: hidden;
   border-radius: 10px;
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
 }
+
 
 .product-details-carousel-images {
   display: flex;
   transition: transform 0.5s ease-in-out;
+  cursor: pointer;
 }
 
 .product-details-carousel-images img {
@@ -376,31 +386,65 @@ html {
   object-fit: cover;
 }
 
-.carousel-buttons {
+.arrow-button {
+  opacity: 0; /* Hidden by default */
+  visibility: hidden; /* Hidden by default */
+  transition: opacity 0.3s ease, visibility 0.3s ease; /* Smooth transition */
+}
+
+.product-details-carousel:hover .arrow-button {
+  opacity: 1; /* Fully visible */
+  visibility: visible; /* Make them visible */
+}
+
+/* thumbnails */
+.carousel-thumbnails {
+  display: flex;
+  margin-top: 20px;
+}
+
+.carousel-thumbnails img {
+  width: 60px;
+  height: 60px;
+  object-fit: cover;
+  margin: 0 10px;
+  cursor: pointer;
+  border: 2px solid transparent;
+  border-radius: 5px;
+  transition: border 0.3s ease;
+}
+
+.carousel-thumbnails img:hover {
+  border: 2px solid #333; /* Highlight the thumbnail on hover */
+}
+
+.carousel-thumbnails img.active-thumbnail {
+  border: 2px solid #ff6347; /* Active thumbnail border color */
+}
+
+.arrow-button {
   position: absolute;
   top: 50%;
   transform: translateY(-50%);
   background: none;
   border: none;
-  padding: 0;
   cursor: pointer;
-  z-index: 1;
+  z-index: 1; 
 }
 
-button img {
-  width: 40px;
-  height: 40px;
+.arrow-button {
+  font-size: 20px;
 }
 
-button.prev {
+.arrow-button.prev {
   left: 10px;
 }
 
-button.next {
+.arrow-button.next {
   right: 10px;
 }
 
-button:hover img {
+.arrow-button:hover {
   opacity: 0.8;
 }
 /* Right Section (Product Info) */
@@ -462,12 +506,13 @@ button:hover img {
 }
 
 .add-to-cart-button {
-  background-color: #ffb84d;
+  background-color: #FFB947;
   color: #5D3F30;
   padding: 15px 80px;
+  margin-left: 50px;
   border: 2px solid #5D3F30;
   border-radius: 30px;
-  font-size: 14px;
+  font-size: 16px;
   font-weight: bold;
   cursor: pointer;
   transition: transform 0.3s ease, border-color 0.3s ease;
@@ -475,7 +520,7 @@ button:hover img {
 
 .add-to-cart-button:hover {
   border-color: #FFB947;
-  transform: scale(1.1);
+  transform: scale(1.05);
 }
 
 
@@ -588,13 +633,13 @@ button:hover img {
   gap: 50px;
 }
 
-.social-icon img {
-  width: 20px;
-  height: 20px;
+.social-icon {
+  font-size: 20px;
+  color:#5D3F30;
   transition: transform 0.3s ease, filter 0.3s ease; /* Smooth hover effect */
 }
 
-.social-icon img:hover {
+.social-icon:hover {
   transform: scale(1.2); /* Slightly enlarge on hover */
 }
 
@@ -619,15 +664,11 @@ button:hover img {
 
   .cart-menu {
     display: flex;        /* Align items horizontally */
-    gap: 25px;            /* Space between cart and menu icons */
-    right: 20px;          /* Distance from the right edge */
+    right: 25px;          /* Distance from the right edge */
     bottom: 60px;         /* Distance from the bottom edge */
+    gap: 30px;            /* Space between items */
   }
-  
-  .cart-icon, .menu-icon {
-    width: 25px;          /* Set icon width */
-    height: 25px;         /* Set icon height */
-  }
+
   
 
   /* Hero Section */
@@ -654,6 +695,7 @@ button:hover img {
   /* Bestsellers Section */
   .heading-container h2 {
     font-size: 30px;
+    margin-bottom: 0px;
   }
 
   .products-container {
@@ -666,8 +708,9 @@ button:hover img {
     height: auto;
   }
 
-  .product-image {
-    height: auto;
+  .product-image-container {
+    height: 70%;
+    width: 100%;
   }
 
   .product-name .product-price{
@@ -717,11 +760,7 @@ button:hover img {
   }
 
   .footer-social {
-    gap: 10px;
+    gap: 20px;
   }
 
-  .footer-social .social-icon img {
-    width: 16px;
-    height: 16px;
-  }
 }

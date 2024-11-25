@@ -7,6 +7,7 @@
   <title>Hooked on Loops</title>
   <link href="https://fonts.googleapis.com/css2?family=Comfortaa:wght@400;700&family=Nunito:wght@400;700&display=swap"
     rel="stylesheet">
+    <script src="https://kit.fontawesome.com/c0e5014365.js" crossorigin="anonymous"></script>
   <link rel="stylesheet" href="style.css">
 </head>
 
@@ -16,18 +17,18 @@
     <div class="container">
 
       <a href="index.html" class="logo-link">
-        <img src="icons/logo.png" alt="Logo" class="logo">
+        <img src="images/logo.png" alt="Logo" class="logo">
       </a>      
 
       <div class="cart-menu">
         <a href="cart.html" class="cart-icon-link">
-          <img src="icons/cart icon.png" alt="Cart" class="cart-icon">
+          <i class="fa-solid fa-cart-shopping"></i>
         </a>
       
         <div class="menu-dropdown">
           <!-- Menu Icon -->
           <a href="#" class="menu-icon-link">
-            <img src="icons/menu icon.png" alt="Menu" class="menu-icon">
+            <i class="fa-solid fa-bars"></i>
           </a>
 
           <div class="dropdown-content">
@@ -84,6 +85,7 @@
               <img src="scrunchies/cute one.jpg" alt="product image"class="product-image">
             </div>
               <p class="product-name">cotton candy</p>
+              <p class="product-subname">scrunchie</p>
               <p class="product-price">S$8.00</p>
             </a>
           </div>
@@ -94,7 +96,8 @@
               <img src="keychains/flower keychain.jpg" alt="product image"class="product-image">
             </div>
               <p class="product-name">flower power</p>
-              <p class="product-price">S$10.00</p>
+              <p class="product-subname">keychain</p>
+              <p class="product-price">S$15.00</p>
             </a>
           </div>
           
@@ -104,16 +107,18 @@
               <img src="bouquet/yellow bouquet.jpg" alt="product image"class="product-image">
             </div>
               <p class="product-name">mellow yellow</p>
+              <p class="product-subname">bouquet</p>
               <p class="product-price">S$54.00</p>
             </a>
           </div>
           
             <div class="product-card">
-              <a href="green-pea.html" class="product-link">
+              <a href="product.html?id=green-pea" class="product-link">
                 <div class="product-image-container">
-                    <img src="scrunchies/green flower scrunchie.jpg" alt="product image"class="product-image">
+                    <img src="scrunchies/green pea.jpg" alt="product image"class="product-image">
                 </div>
                 <p class="product-name">green pea</p>
+                <p class="product-subname">scrunchie</p>
                 <p class="product-price">S$6.00</p>
               </a>
             </div>
@@ -159,12 +164,12 @@
       <div class="footer-social">
         <!-- Twitter Icon Link -->
         <a href="https://twitter.com" target="_blank" class="social-icon">
-          <img src="icons/Icon.png" alt="Twitter">
+          <i class="fa-brands fa-twitter"></i>
         </a>
       
         <!-- Instagram Icon Link -->
         <a href="https://instagram.com" target="_blank" class="social-icon">
-          <img src="icons/Instagram.png" alt="Instagram">
+          <i class="fa-brands fa-instagram"></i>
         </a>
       </div>
       
@@ -192,5 +197,6 @@
   </footer>
   
 </body>
+<script src="script.js"></script>
 
 </html>

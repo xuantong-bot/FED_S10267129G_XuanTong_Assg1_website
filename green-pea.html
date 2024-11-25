@@ -31,7 +31,7 @@
           </a>
 
           <div class="dropdown-content">
-            <a href="index.html">home</a>
+            <a href="homepage.html">home</a>
             <a href="shop-all.html">shop all</a>
             <a href="bestsellers.html">bestsellers</a>
             <a href="scrunchies.html" class="active">scrunchies</a>
@@ -48,73 +48,56 @@
     </div>
   </header>
 
-    <!-- Breadcrumb Section -->
-    <div class="breadcrumb-container">
-        <nav class="breadcrumb">
-            <a href="index.html">home</a>
-            <span>/</span>
-            <a href="bestsellers.html">bestsellers</a>
-        </nav>
-    </div> 
+  <div class="breadcrumb-container">
+    <ul class="breadcrumb">
+      <li><a href="index.html">home</a></li>
+      <span>/</span>
+      <li><a href="scrunchies.html">scrunchies</a></li>
+      <span>/</span>
+      <li><a href="green-pea.html" class="current-page">green pea</a></li>
+    </ul>
+  </div>
 
   <!-- Main Content -->
   <main>
-    <!-- Bestsellers -->
-    <section class="bestsellers-section">
-      <div class="container">
-
-        <div class="heading-container">
-          <h2>our bestsellers ✨</h2>
+    <!-- Product Details Section -->
+    <section class="product-detail">
+        <div class="notification">
+          <p><strong>"product name 1"</strong> has been added to your cart!</p>
+          <a href="cart.html" class="view-cart-button">view cart</a>
         </div>
-
-        <div class="products-container">
-          
-          <div class="product-card">
-            <a href="cotton-candy.html" class="product-link">
-            <div class="product-image-container">
-              <img src="scrunchies/cute one.jpg" alt="product image"class="product-image">
+      
+        <div class="product-container">
+          <!-- Left Section -->
+          <div class="product-image-gallery">
+            <div class="main-image"></div>
+            <div class="thumbnail-container">
+              <div class="thumbnail"></div>
+              <div class="thumbnail"></div>
             </div>
-              <p class="product-name">cotton candy</p>
-              <p class="product-price">S$8.00</p>
-            </a>
           </div>
-        
-          <div class="product-card">
-            <a href="flower power.html" class="product-link">
-            <div class="product-image-container">
-              <img src="keychains/flower keychain.jpg" alt="product image"class="product-image">
+      
+          <!-- Right Section -->
+          <div class="product-info">
+            <h2 class="product-name">product name 1</h2>
+            <p class="product-price">S$1.00</p>
+            <p class="product-description">
+              Product description product description product description product description product description product
+              description product description product description.
+            </p>
+      
+            <div class="product-actions">
+              <div class="quantity-selector">
+                <button class="quantity-button decrement">-</button>
+                <span class="quantity">1</span>
+                <button class="quantity-button increment">+</button>
+              </div>
+              <button class="add-to-cart-button">add to cart</button>
             </div>
-              <p class="product-name">flower power</p>
-              <p class="product-price">S$10.00</p>
-            </a>
           </div>
-          
-          <div class="product-card">
-            <a href="mellow-yellow.html" class="product-link">
-            <div class="product-image-container">
-              <img src="bouquet/yellow bouquet.jpg" alt="product image"class="product-image">
-            </div>
-              <p class="product-name">mellow yellow</p>
-              <p class="product-price">S$54.00</p>
-            </a>
-          </div>
-          
-            <div class="product-card">
-              <a href="green-pea.html" class="product-link">
-                <div class="product-image-container">
-                    <img src="scrunchies/green flower scrunchie.jpg" alt="product image"class="product-image">
-                </div>
-                <p class="product-name">green pea</p>
-                <p class="product-price">S$6.00</p>
-              </a>
-            </div>
         </div>
-
-      </div>
-    </section>
-
-    
-  </main>
+      </section>
+      
 
   <!-- Footer -->
   <footer class="footer" id="contact-us">
@@ -136,7 +119,7 @@
       <div class="footer-links">
         <ul>
           <li><a href="#">shop all</a></li>
-          <li><a href="#">bestsellers</a></li>
+          <li><a href="bestsellers.html">bestsellers</a></li>
           <li><a href="#">scrunchies</a></li>
           <li><a href="#">keychains</a></li>
           <li><a href="#">bouquets</a></li>

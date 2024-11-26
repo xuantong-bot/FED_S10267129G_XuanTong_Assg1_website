@@ -53,7 +53,7 @@
 
   <!-- main Content -->
   <main>
-    <section class="product-details">
+    <section class="product-details-section">
       <div class="container">
         <div class="notification">
           <i class="fa-regular fa-bell fa-shake"></i>
@@ -61,31 +61,31 @@
           <a href="cart.html" class="view-cart-button">view cart</a>
         </div>
 
-        <div class="product-detail-content">
+        <div class="product-details" id="product-details">
 
           <!-- left section -->
           <div class="left-section">
             <div class="product-details-carousel">
-              <button class="arrow-button prev" onclick="prevSlide()">
+              <button class="arrow-button prev">
                 <i class="fa-solid fa-angle-left"></i>
               </button>
-              <div class="product-details-carousel-images" id="carousel-images">
-
-              </div>
-              <button class="arrow-button next" onclick="nextSlide()">
+              <div class="product-details-carousel-images" id="carousel-images"></div>
+              <button class="arrow-button next">
                 <i class="fa-solid fa-angle-right"></i>
               </button>
             </div>
+            <div class="carousel-thumbnails" id="carousel-thumbnails"></div>
+            
 
             <!-- thumbnail -->
             <div class="carousel-thumbnails" id="carousel-thumbnails"></div>
         </div>
           <!-- right section -->
           <div class="product-info">
-            <h2 id="product-name" class="product-details-name">Product Name</h2>
-            <p id="product-subname" class="product-subname">Product Subname</p>
+            <h2 id="product-name" class="product-details-name">product Name</h2>
+            <p id="product-subname" class="product-subname">product subname</p>
             <p id="product-price" class="product-details-price">S$0.00</p>
-            <p id="product-description" class="product-description">Product description</p>
+            <p id="product-description" class="product-description">product description</p>
             <div class="product-actions">
               <div class="quantity-selector">
                 <button class="quantity-button" id="decrement">-</button>

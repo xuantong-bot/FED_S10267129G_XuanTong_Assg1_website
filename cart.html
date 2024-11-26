@@ -56,30 +56,31 @@
   <!-- main Content -->
   <main>
     <div class="cart-container">
-        <div class="story-heading-container">
-          <h1>your cart</h1>
+      <!-- Cart Items Section -->
+      <div class="cart-items-section">
+        <h1 class="story-heading-container">your cart</h1>
+        <div id="cart-items" class="cart-items">
+          <!-- Product items will be dynamically inserted here -->
         </div>
-
-        <div class="cart-list">
-            <div id="cart-list">
-              <!-- Product items will be generated dynamically here -->
-            </div>
+      </div>
+  
+      <!-- Cart Summary Section -->
+      <div class="cart-summary">
+        <h2>promo code</h2>
+        <div class="promo-code">
+          <input type="text" id="promo-code" placeholder="type here..." />
+          <button id="apply-promo" class="apply-button">apply</button>
         </div>
-    
-        <div class="cart-summary">
-          <input type="text" id="promo-code" placeholder="Promo code">
-          <button id="apply-promo">apply</button>
-          <div class="summary-details">
-            <p>Subtotal: <span id="subtotal">S$0.00</span></p>
-            <p>Discount: <span id="discount">S$0.00</span></p>
-            <p>Total: <span id="total">S$0.00</span></p>
-          </div>
-          <button id="proceed-checkout">proceed to checkout</button>
+        <div class="summary-details">
+          <p>subtotal: <span id="subtotal">S$0.00</span></p>
+          <p>discount: <span id="discount">S$0.00</span></p>
+          <p><strong>Total:</strong> <span id="total">S$0.00</span></p>
         </div>
+        <button id="proceed-checkout" class="checkout-button">proceed to checkout</button>
+      </div>
     </div>
-    
-      
   </main>
+  
 
   <!-- Footer -->
   <footer class="footer" id="contact-us">

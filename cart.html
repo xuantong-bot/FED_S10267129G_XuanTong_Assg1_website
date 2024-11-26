@@ -47,58 +47,38 @@
       <span>/</span>
       <li><a href="#" id="breadcrumb-category">category</a></li>
       <span>/</span>
-      <li id="breadcrumb-product" class="current-page">product name</li>
+      <li><a href="#" id="breadcrumb-product">product name</a></li>
+      <span>/</span>
+      <li class="current-page" id="breadcrumb-cart"><a href="#">cart</a></li>
     </ul>
   </div>
 
   <!-- main Content -->
   <main>
-    <section class="product-details">
-      <div class="container">
-        <div class="notification">
-          <i class="fa-regular fa-bell fa-shake"></i>
-          <p><strong id="notification-name">"product name"</strong> has been added to your cart!</p>
-          <a href="cart.html" class="view-cart-button">view cart</a>
+    <div class="cart-container">
+        <div class="story-heading-container">
+          <h1>your cart</h1>
         </div>
 
-        <div class="product-detail-content">
-
-          <!-- left section -->
-          <div class="left-section">
-            <div class="product-details-carousel">
-              <button class="arrow-button prev" onclick="prevSlide()">
-                <i class="fa-solid fa-angle-left"></i>
-              </button>
-              <div class="product-details-carousel-images" id="carousel-images">
-
-              </div>
-              <button class="arrow-button next" onclick="nextSlide()">
-                <i class="fa-solid fa-angle-right"></i>
-              </button>
+        <div class="cart-list">
+            <div id="cart-list">
+              <!-- Product items will be generated dynamically here -->
             </div>
-
-            <!-- thumbnail -->
-            <div class="carousel-thumbnails" id="carousel-thumbnails"></div>
         </div>
-          <!-- right section -->
-          <div class="product-info">
-            <h2 id="product-name" class="product-details-name">Product Name</h2>
-            <p id="product-subname" class="product-subname">Product Subname</p>
-            <p id="product-price" class="product-details-price">S$0.00</p>
-            <p id="product-description" class="product-description">Product description</p>
-            <div class="product-actions">
-              <div class="quantity-selector">
-                <button class="quantity-button" id="decrement">-</button>
-                <span class="quantity" id="quantity">1</span>
-                <button class="quantity-button" id="increment">+</button>
-            </div>
-            <button class="add-to-cart-button" id="add-to-cart" onclick="addToCart()">add to cart</button>
-            
-            </div>
+    
+        <div class="cart-summary">
+          <input type="text" id="promo-code" placeholder="Promo code">
+          <button id="apply-promo">apply</button>
+          <div class="summary-details">
+            <p>Subtotal: <span id="subtotal">S$0.00</span></p>
+            <p>Discount: <span id="discount">S$0.00</span></p>
+            <p>Total: <span id="total">S$0.00</span></p>
           </div>
+          <button id="proceed-checkout">proceed to checkout</button>
         </div>
-      </div>
-    </section>
+    </div>
+    
+      
   </main>
 
   <!-- Footer -->

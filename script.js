@@ -40,14 +40,12 @@ const products = {
 
 // Globals
 let currentIndex = 0;
-let cart = [];
+let cart = JSON.parse(localStorage.getItem("cart")) || [];
 
 document.addEventListener("DOMContentLoaded", () => {
-  // Check for the cart page first
   const urlParams = new URLSearchParams(window.location.search);
   const productId = urlParams.get("id");
-  console.log("Product ID from URL:", productId); // Debugging to ensure the product ID is correct
-
+  updateCartNotification();
   if (productId && products[productId]) {
     // If on a product page, render the product details
     const product = products[productId];
@@ -68,12 +66,35 @@ document.addEventListener("DOMContentLoaded", () => {
   if (document.getElementById("cart-items")) {
     renderCartItems();
   }
+  // Only render checkout summary if on checkout page
+  if (document.getElementById("checkout-summary")) {
+    console.log("Rendering checkout summary");
+    renderCheckoutSummary();
+  }
+  else {
+    console.log("Not on checkout page");
+  }
 });
+
+// Helper functions for DOM manipulation
+function createElement(tag, options = {}) {
+  const { src, alt, style, classList, textContent } = options;
+  const element = document.createElement(tag);
+
+  if (src) element.src = src;
+  if (alt) element.alt = alt;
+  if (style) Object.assign(element.style, style);
+  if (classList) element.classList.add(...classList);
+  if (textContent) element.textContent = textContent;
+
+  return element;
+}
 
 // f: render cart items
 function renderCartItems() {
   const cartItemsContainer = document.getElementById("cart-items");
 
+  // Check if the cart container exists
   if (!cartItemsContainer) {
     console.error("Cart container not found!");
     return;
@@ -94,7 +115,7 @@ function renderCartItems() {
     // Product Image
     const productImage = document.createElement("img");
     productImage.classList.add("cart-product-image");
-    productImage.src = item.images && item.images.length > 0 ? item.images[0] : "default-image.jpg";
+    productImage.src = item.images && item.images.length > 0 ? item.images[0] : "scrunchies/cute one.jpg";
     productImage.alt = item.images && item.images.length > 0 ? item.name : "No image available";
 
     // Product Details 
@@ -139,8 +160,13 @@ function renderCartItems() {
 
     // Remove Button
     const removeButton = document.createElement("button");
-    removeButton.textContent = "×";
     removeButton.classList.add("remove-button");
+
+    // Add Font Awesome icon
+    const icon = document.createElement("i");
+    icon.classList.add("fas", "fa-times"); // Font Awesome cross icon
+    removeButton.appendChild(icon);
+
 
     // Append everything to the cart item div
     cartItemDiv.appendChild(productImage);
@@ -153,7 +179,8 @@ function renderCartItems() {
     incrementButton.addEventListener("click", () => {
       item.quantity++;
       quantityDisplay.textContent = item.quantity;
-      localStorage.setItem("cart", JSON.stringify(cart)); 
+      localStorage.setItem("cart", JSON.stringify(cart));
+      updateCartNotification();
       updateCartTotal();
     });
 
@@ -162,6 +189,7 @@ function renderCartItems() {
         item.quantity--;
         quantityDisplay.textContent = item.quantity;
         localStorage.setItem("cart", JSON.stringify(cart)); 
+        updateCartNotification();
         updateCartTotal();
       }
     });
@@ -170,6 +198,7 @@ function renderCartItems() {
     removeButton.addEventListener("click", () => {
       cart.splice(index, 1); // Remove the item from the cart
       localStorage.setItem("cart", JSON.stringify(cart)); // Update localStorage
+      updateCartNotification();
       renderCartItems(); // Re-render cart items
       updateCartTotal(); // Update totals
     });
@@ -178,11 +207,124 @@ function renderCartItems() {
   updateCartTotal(); // Ensure the total is updated after rendering
 }
 
+// f: render product details
+function renderProductDetails(product) {
+  document.getElementById("product-name").textContent = product.name;
+  document.getElementById("product-subname").textContent = product.subname;
+  document.getElementById("product-price").textContent = `S$${product.price.toFixed(2)}`;
+  document.getElementById("product-description").textContent = product.description;
+
+  // show the 1st product image in the carousel as default
+  const firstImage = document.createElement("img");
+  firstImage.src = product.images[0];
+  firstImage.alt = product.name;
+  document.getElementById("carousel-images").appendChild(firstImage);
+}
+
+// f: render checkout page
+function renderCheckoutSummary() {
+  console.log("Renderingggg checkout summary");
+  const cartItemsContainer = document.getElementById("checkout-items");
+
+  if (!cartItemsContainer) {
+    console.error("Cart container not found!");
+    return;
+  }
+
+  cartItemsContainer.innerHTML = ""; // Clear existing items
+
+  cart.forEach(item => {
+    const cartItemDiv = document.createElement("div");
+    cartItemDiv.classList.add("checkout-item");
+
+    // Product Image
+    const productImage = document.createElement("img");
+    productImage.src = item.images && item.images.length > 0 ? item.images[0] : "scrunchies/cute one.jpg";
+    productImage.alt = item.images && item.images.length > 0 ? item.name : "No image available";
+
+    // Product Details
+    const productDetails = document.createElement("div");
+    productDetails.classList.add("checkout-details");
+
+    const productName = document.createElement("p");
+    productName.textContent = `${item.name} x${item.quantity}`;
+
+    const productPrice = document.createElement("p");
+    productPrice.textContent = `S$${(item.price * item.quantity).toFixed(2)}`;
+
+    productDetails.appendChild(productName);
+    productDetails.appendChild(productPrice);
+
+    // Append elements to cart item
+    cartItemDiv.appendChild(productImage);
+    cartItemDiv.appendChild(productDetails);
+    cartItemsContainer.appendChild(cartItemDiv);
+  });
+
+  updateCheckoutTotal();
+}
 
 
 
+// f: setup cart functions
+function setupCartFunctions(product) {
+  const addToCartButton = document.getElementById("add-to-cart");
+  const incrementButton = document.getElementById("increment");
+  const decrementButton = document.getElementById("decrement");
+  const quantityDisplay = document.getElementById("quantity");
 
-// Function to update the cart total price
+  if (!incrementButton || !decrementButton || !quantityDisplay) {
+    console.error("Quantity buttons or display not found.");
+    return;
+  }
+
+  // Initialize quantity button logic
+  const getQuantity = setupQuantityButtons(incrementButton, decrementButton, quantityDisplay);
+
+  if (addToCartButton) {
+    addToCartButton.addEventListener("click", () => {
+      const quantity = getQuantity(); // Get the current quantity
+      console.log("Adding to cart:", product.id, quantity);
+      addToCart(product.id, quantity);
+      showCartNotification(product, quantity);
+    });
+  } else {
+    console.error("Add to Cart button not found.");
+  }
+}
+
+// f: add to cart
+function addToCart(productId, quantity) {
+  const product = products[productId];  // Fetch product using productId as key
+  
+  if (product) {
+    const cartItem = {
+      ...product,  // Copy product data
+      quantity: quantity || 1  // Default quantity is 1 if not specified
+    };
+
+    // Check if product already exists in cart
+    const existingItem = cart.find(item => item.id === productId);
+    
+    if (existingItem) {
+      // Update the quantity if the item already exists
+      existingItem.quantity += cartItem.quantity;
+    } else {
+      // Add the product to the cart if it's not in the cart yet
+      cart.push(cartItem);
+    }
+
+    // Store updated cart in localStorage
+    localStorage.setItem("cart", JSON.stringify(cart));
+    updateCartNotification();
+    console.log("cart updated", cart);
+
+  } else {
+    console.error("Product not found with ID:", productId);
+  }
+}
+
+// f: update cart total price summary
 function updateCartTotal() {
   const subtotalElement = document.getElementById("subtotal");
   const discountElement = document.getElementById("discount");
@@ -202,38 +344,72 @@ function updateCartTotal() {
   totalElement.textContent = `S$${total.toFixed(2)}`;
 }
 
+// f: update checkout total price summary
+function updateCheckoutTotal() {
+  let subtotal = 0;
+  cart.forEach(item => {
+    subtotal += item.price * item.quantity;
+  });
 
+  const shipping = 5.00; // Shipping cost (could be dynamic)
+  const total = subtotal + shipping;
 
-
-// Helper functions for DOM manipulation
-function createElement(tag, options = {}) {
-  const { src, alt, style, classList, textContent } = options;
-  const element = document.createElement(tag);
-
-  if (src) element.src = src;
-  if (alt) element.alt = alt;
-  if (style) Object.assign(element.style, style);
-  if (classList) element.classList.add(...classList);
-  if (textContent) element.textContent = textContent;
-
-  return element;
+  document.getElementById("subtotal").textContent = `S$${subtotal.toFixed(2)}`;
+  document.getElementById("shipping").textContent = `S$${shipping.toFixed(2)}`;
+  document.getElementById("total").textContent = `S$${total.toFixed(2)}`;
 }
 
+// f: quantity update
+function setupQuantityButtons(incrementButton, decrementButton, quantityDisplay, initialQuantity = 1) {
+  let quantity = initialQuantity;
 
+  const updateQuantityDisplay = () => {
+    quantityDisplay.textContent = quantity;
+  };
 
+  incrementButton.addEventListener("click", () => {
+    quantity++;
+    updateQuantityDisplay();
+  });
 
-// f: render product details
-function renderProductDetails(product) {
-  document.getElementById("product-name").textContent = product.name;
-  document.getElementById("product-subname").textContent = product.subname;
-  document.getElementById("product-price").textContent = `S$${product.price.toFixed(2)}`;
-  document.getElementById("product-description").textContent = product.description;
+  decrementButton.addEventListener("click", () => {
+    if (quantity > 1) {
+      quantity--;
+      updateQuantityDisplay();
+    }
+  });
 
-  // show the 1st product image in the carousel as default
-  const firstImage = document.createElement("img");
-  firstImage.src = product.images[0];
-  firstImage.alt = product.name;
-  document.getElementById("carousel-images").appendChild(firstImage);
+  updateQuantityDisplay(); // Initialize display
+  return () => quantity; // Return a function to get the current quantity
+}
+
+// function to update the cart notification
+function updateCartNotification() {
+
+  const cartCount = cart.reduce((total, item) => total + item.quantity, 0); // Calculate the total number of items in the cart
+  const cartNotification = document.getElementById("cart-notification");
+  const cartCountElement = document.getElementById("cart-count");
+
+  cartCountElement.textContent = cartCount; // Update the count in the notification
+
+  // Show notification if cart is not empty
+  if (cartCount > 0) {
+    cartNotification.classList.add("visible");
+  } else {
+    cartNotification.classList.remove("visible");
+  }
+}
+
+// f: show notification in product.html
+function showCartNotification(product, quantity) {
+  const notification = document.querySelector(".notification");
+  if (notification.classList.contains("visible")) {
+    notification.classList.remove("visible");
+  }
+  document.getElementById("notification-name").textContent = `"${product.name}" x${quantity}`;
+  notification.classList.add("visible");
+
+  setTimeout(() => notification.classList.remove("visible"), 3000);
 }
 
 // carousel setup
@@ -298,99 +474,4 @@ function highlightThumbnail(index) {
   thumbnails[index].classList.add("active-thumbnail");
 }
 
-// f: setup cart functions
-function setupCartFunctions(product) {
-  const addToCartButton = document.getElementById("add-to-cart");
-  const incrementButton = document.getElementById("increment");
-  const decrementButton = document.getElementById("decrement");
-  const quantityDisplay = document.getElementById("quantity");
-
-  if (!incrementButton || !decrementButton || !quantityDisplay) {
-    console.error("Quantity buttons or display not found.");
-    return;
-  }
-
-  // Initialize quantity button logic
-  const getQuantity = setupQuantityButtons(incrementButton, decrementButton, quantityDisplay);
-
-  if (addToCartButton) {
-    addToCartButton.addEventListener("click", () => {
-      const quantity = getQuantity(); // Get the current quantity
-      console.log("Adding to cart:", product.id, quantity);
-      addToCart(product.id, quantity);
-      showCartNotification(product, quantity);
-    });
-  } else {
-    console.error("Add to Cart button not found.");
-  }
-}
-
-
-// Function to add products to the cart with a specified quantity
-function addToCart(productId, quantity) {
-  const product = products[productId];  // Fetch product using productId as key
-  
-  if (product) {
-    const cartItem = {
-      ...product,  // Copy product data
-      quantity: quantity || 1  // Default quantity is 1 if not specified
-    };
-
-    // Check if product already exists in cart
-    const existingItem = cart.find(item => item.id === productId);
-    
-    if (existingItem) {
-      // Update the quantity if the item already exists
-      existingItem.quantity += cartItem.quantity;
-    } else {
-      // Add the product to the cart if it's not in the cart yet
-      cart.push(cartItem);
-    }
-
-    // Store updated cart in localStorage
-    localStorage.setItem("cart", JSON.stringify(cart));
-    console.log("cart updated", cart);
-  } else {
-    console.error("Product not found with ID:", productId);
-  }
-}
-
-// f: quantity update
-function setupQuantityButtons(incrementButton, decrementButton, quantityDisplay, initialQuantity = 1) {
-  let quantity = initialQuantity;
-
-  const updateQuantityDisplay = () => {
-    quantityDisplay.textContent = quantity;
-  };
-
-  incrementButton.addEventListener("click", () => {
-    quantity++;
-    updateQuantityDisplay();
-  });
-
-  decrementButton.addEventListener("click", () => {
-    if (quantity > 1) {
-      quantity--;
-      updateQuantityDisplay();
-    }
-  });
-
-  updateQuantityDisplay(); // Initialize display
-  return () => quantity; // Return a function to get the current quantity
-}
-
-
-// f: show notification in product.html
-function showCartNotification(product, quantity) {
-  const notification = document.querySelector(".notification");
-  if (notification.classList.contains("visible")) {
-    notification.classList.remove("visible");
-  }
-  document.getElementById("notification-name").textContent = `"${product.name}" x${quantity}`;
-  notification.classList.add("visible");
-
-  setTimeout(() => notification.classList.remove("visible"), 3000);
-}
-
 console.log("script.js loaded");
-

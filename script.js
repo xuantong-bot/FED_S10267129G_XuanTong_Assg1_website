@@ -78,77 +78,129 @@ function renderCartItems() {
     console.error("Cart container not found!");
     return;
   }
-  
+
   cartItemsContainer.innerHTML = ""; // Clear existing items
 
   if (cart.length === 0) {
-    cartItemsContainer.innerHTML = "<p>Your cart is empty.</p>";
+    cartItemsContainer.innerHTML = "<p>your cart is empty.</p>";
+    updateCartTotal();
     return;
   }
 
-  cart.forEach(item => {
+  cart.forEach((item, index) => {
     const cartItemDiv = document.createElement("div");
-    cartItemDiv.classList.add("cart-items");
+    cartItemDiv.classList.add("cart-item");
 
+    // Product Image
     const productImage = document.createElement("img");
-    if (item.images && Array.isArray(item.images) && item.images.length > 0) {
-      productImage.src = item.images[0]; // Use the first image if available
-    } else {
-      productImage.src = "default-image.jpg"; // Fallback image if no images available
-    }
-    productImage.alt = item.name;
+    productImage.classList.add("cart-product-image");
+    productImage.src = item.images && item.images.length > 0 ? item.images[0] : "default-image.jpg";
+    productImage.alt = item.images && item.images.length > 0 ? item.name : "No image available";
 
+    // Product Details 
     const productDetails = document.createElement("div");
-    productDetails.classList.add("product-details");
+    productDetails.classList.add("cart-product-details");
 
     const productName = document.createElement("h3");
     productName.textContent = item.name;
 
     const productSubname = document.createElement("p");
+    productSubname.classList.add("product-subname");
     productSubname.textContent = item.subname;
 
     const productPrice = document.createElement("p");
-    if (item.price !== undefined) {
-      productPrice.textContent = `S$${item.price.toFixed(2)}`; // Format the price
-    } else {
-      console.error("Price is undefined for item", item);
-      productPrice.textContent = "S$0.00"; // Default price if missing
-    }
-
-    const productQuantity = document.createElement("p");
-    productQuantity.textContent = `Quantity: ${item.quantity}`;
+    productPrice.classList.add("cart-product-price");
+    productPrice.textContent = `S$${item.price.toFixed(2)}`;
 
     productDetails.appendChild(productName);
     productDetails.appendChild(productSubname);
     productDetails.appendChild(productPrice);
-    productDetails.appendChild(productQuantity);
 
+    // Quantity Controls
+    const quantityControls = document.createElement("div");
+    quantityControls.classList.add("quantity-controls");
+
+    const decrementButton = document.createElement("button");
+    decrementButton.textContent = "-";
+    decrementButton.classList.add("decrement");
+
+    const quantityDisplay = document.createElement("span");
+    quantityDisplay.textContent = item.quantity;
+    quantityDisplay.classList.add("quantity-display");
+
+    const incrementButton = document.createElement("button");
+    incrementButton.textContent = "+";
+    incrementButton.classList.add("increment");
+
+    
+    quantityControls.appendChild(decrementButton);
+    quantityControls.appendChild(quantityDisplay);
+    quantityControls.appendChild(incrementButton);
+
+    // Remove Button
+    const removeButton = document.createElement("button");
+    removeButton.textContent = "×";
+    removeButton.classList.add("remove-button");
+
+    // Append everything to the cart item div
     cartItemDiv.appendChild(productImage);
     cartItemDiv.appendChild(productDetails);
+    cartItemDiv.appendChild(quantityControls);
+    cartItemDiv.appendChild(removeButton);
     cartItemsContainer.appendChild(cartItemDiv);
+
+    // Event Listeners for Quantity Adjustment
+    incrementButton.addEventListener("click", () => {
+      item.quantity++;
+      quantityDisplay.textContent = item.quantity;
+      localStorage.setItem("cart", JSON.stringify(cart)); 
+      updateCartTotal();
+    });
+
+    decrementButton.addEventListener("click", () => {
+      if (item.quantity > 1) {
+        item.quantity--;
+        quantityDisplay.textContent = item.quantity;
+        localStorage.setItem("cart", JSON.stringify(cart)); 
+        updateCartTotal();
+      }
+    });
+
+    // Remove Button Logic
+    removeButton.addEventListener("click", () => {
+      cart.splice(index, 1); // Remove the item from the cart
+      localStorage.setItem("cart", JSON.stringify(cart)); // Update localStorage
+      renderCartItems(); // Re-render cart items
+      updateCartTotal(); // Update totals
+    });
   });
 
-  updateCartTotal(); // Make sure to update the cart total after rendering the items
+  updateCartTotal(); // Ensure the total is updated after rendering
 }
+
+
 
 
 
 // Function to update the cart total price
 function updateCartTotal() {
-  const total = cart.reduce((sum, item) => sum + (item.price * item.quantity), 0);
+  const subtotalElement = document.getElementById("subtotal");
+  const discountElement = document.getElementById("discount");
+  const totalElement = document.getElementById("total");
+  
+  let subtotal = 0;
 
-  // Update the subtotal, discount (if any), and total price in the DOM
-  document.getElementById("subtotal").textContent = `S$${total.toFixed(2)}`;
-  
-  // Assuming there is a discount functionality, you can add that here
-  const discount = 0; // Example: Replace this with actual discount logic
-  const totalWithDiscount = total - discount;
-  
-  document.getElementById("discount").textContent = `S$${discount.toFixed(2)}`;
-  document.getElementById("total").textContent = `S$${totalWithDiscount.toFixed(2)}`;
+  cart.forEach(item => {
+    subtotal += item.price * item.quantity;
+  });
+
+  const discount = 0; // Adjust this based on promo code logic
+  const total = subtotal - discount;
+
+  subtotalElement.textContent = `S$${subtotal.toFixed(2)}`;
+  discountElement.textContent = `S$${discount.toFixed(2)}`;
+  totalElement.textContent = `S$${total.toFixed(2)}`;
 }
-
-
 
 
 
@@ -253,25 +305,18 @@ function setupCartFunctions(product) {
   const decrementButton = document.getElementById("decrement");
   const quantityDisplay = document.getElementById("quantity");
 
-  let quantity = 1;
-  console.log("Product:", product.id, product);
-  // Update quantity display on increment button click
-  incrementButton.addEventListener("click", () => {
-    quantity++;
-    quantityDisplay.textContent = quantity;
-  });
+  if (!incrementButton || !decrementButton || !quantityDisplay) {
+    console.error("Quantity buttons or display not found.");
+    return;
+  }
 
-  // Update quantity display on decrement button click
-  decrementButton.addEventListener("click", () => {
-    if (quantity > 1) {
-      quantity--;
-      quantityDisplay.textContent = quantity;
-    }
-  });
+  // Initialize quantity button logic
+  const getQuantity = setupQuantityButtons(incrementButton, decrementButton, quantityDisplay);
 
   if (addToCartButton) {
     addToCartButton.addEventListener("click", () => {
-      console.log("Adding to cart1:", product.id, quantity);
+      const quantity = getQuantity(); // Get the current quantity
+      console.log("Adding to cart:", product.id, quantity);
       addToCart(product.id, quantity);
       showCartNotification(product, quantity);
     });
@@ -279,6 +324,7 @@ function setupCartFunctions(product) {
     console.error("Add to Cart button not found.");
   }
 }
+
 
 // Function to add products to the cart with a specified quantity
 function addToCart(productId, quantity) {
@@ -303,15 +349,43 @@ function addToCart(productId, quantity) {
 
     // Store updated cart in localStorage
     localStorage.setItem("cart", JSON.stringify(cart));
-    console.log("Cart updated", cart);
+    console.log("cart updated", cart);
   } else {
     console.error("Product not found with ID:", productId);
   }
 }
 
+// f: quantity update
+function setupQuantityButtons(incrementButton, decrementButton, quantityDisplay, initialQuantity = 1) {
+  let quantity = initialQuantity;
+
+  const updateQuantityDisplay = () => {
+    quantityDisplay.textContent = quantity;
+  };
+
+  incrementButton.addEventListener("click", () => {
+    quantity++;
+    updateQuantityDisplay();
+  });
+
+  decrementButton.addEventListener("click", () => {
+    if (quantity > 1) {
+      quantity--;
+      updateQuantityDisplay();
+    }
+  });
+
+  updateQuantityDisplay(); // Initialize display
+  return () => quantity; // Return a function to get the current quantity
+}
+
+
 // f: show notification in product.html
 function showCartNotification(product, quantity) {
   const notification = document.querySelector(".notification");
+  if (notification.classList.contains("visible")) {
+    notification.classList.remove("visible");
+  }
   document.getElementById("notification-name").textContent = `"${product.name}" x${quantity}`;
   notification.classList.add("visible");
 

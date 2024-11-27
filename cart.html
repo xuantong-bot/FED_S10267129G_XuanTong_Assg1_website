@@ -55,6 +55,7 @@
 
   <!-- main Content -->
   <main>
+    <div class="container">
     <div class="cart-container">
       <!-- Cart Items Section -->
       <div class="cart-items-section">
@@ -66,19 +67,22 @@
   
       <!-- Cart Summary Section -->
       <div class="cart-summary">
-        <h2>promo code</h2>
+        <h2>promo code:</h2>
         <div class="promo-code">
           <input type="text" id="promo-code" placeholder="type here..." />
           <button id="apply-promo" class="apply-button">apply</button>
         </div>
         <div class="summary-details">
-          <p>subtotal: <span id="subtotal">S$0.00</span></p>
-          <p>discount: <span id="discount">S$0.00</span></p>
-          <p><strong>Total:</strong> <span id="total">S$0.00</span></p>
+          <div class="cart-subprices">
+            <p>subtotal: <span id="subtotal" class="product-price">S$0.00</span></p>
+            <p>discount: <span id="discount" class="product-price">S$0.00</span></p>
+          </div>
+          <p><strong>Total:</strong> <span id="total" class="cart-total">S$0.00</span></p>
         </div>
         <button id="proceed-checkout" class="checkout-button">proceed to checkout</button>
       </div>
     </div>
+  </div>
   </main>
   
 

@@ -749,8 +749,239 @@ html {
   transform: scale(1.05);
 }
 
+/*Checkout Section*/
+/* Left Section - Shipping Form */
+.checkout-left {
+  flex: 0 0 55%;
+}
+
+.form-input {
+  display: block;
+  font-size: 14px;
+  width: 100%;
+  padding: 15px;
+  margin-bottom: 25px;
+  border-radius: 30px;
+  border: none;
+  color: #333;
+  background-color: #FFECC3;
+  box-sizing: border-box;
+}
+
+.form-input-name {
+  display: flex;
+  gap: 10px;
+}
+
+.form-input::placeholder {
+  color: #5D3F30;
+  font-weight: bold;
+}
+
+.textarea-input {
+  resize: none;
+  height: 100px; 
+}
+
+.select-input option{
+  font-weight: bold;
+  background-color: #FFECC3;
+  color: #5D3F30;
+}
+
+.country-select-container {
+  position: relative;
+  display: inline-block;
+  width: 100%;
+}
+
+.country-select-container select {
+  appearance: none;
+  -moz-appearance: none;
+  -webkit-appearance: none;
+  border: none;
+  border-radius: 30px;
+  padding: 15px;
+  font-size: 14px;
+  font-weight: bold;
+  width: 100%;
+  background: #FFECC3;
+  color: #5D3F30;
+  cursor: pointer;
+}
+
+.custom-arrow {
+  position: absolute;
+  top: 35%;
+  right: 20px;
+  transform: translateY(-50%); /* Center the icon vertically */
+  font-size: 14px; /* Adjust icon size */
+  color: #5D3F30;
+  pointer-events: none; /* Prevent the icon from being clicked */
+}
+
+.country-select-container select:focus {
+  outline: none;
+  font-weight: bold;
+  color: #5D3F30;
+}
+
+/* Focus states for all inputs */
+.form-input:focus {
+  outline: none;
+  font-weight: bold;
+  color: #5D3F30
+}
+
+/* Right Section - Summary */
+.checkout-right {
+  flex: 1;
+}
+
+.checkout-summary {
+  padding: 30px 40px;
+  border: 3px solid #FFB947;
+  border-radius: 30px;
+  margin-bottom: 100px;
+}
+
+.checkout-details {
+  display: flex;
+  flex-direction: column;
+  line-height: 1px;
+}
+
+.checkout-item {
+  display: flex;
+  align-items: center;
+  width: 100%;
+  border-bottom: 1.5px solid #FFB947;
+  gap: 20px;
+  padding: 15px 0;
+}
+
+.checkout-item img {
+  width: 80px;
+  height: 80px;
+  object-fit: cover;
+  border-radius: 5px;
+}
+
+.checkout-product-price {
+  font-family: nunito, sans-serif;
+  font-size: 16px;
+  color: #5D3F30;
+}
+
+.checkout-subprices {
+  border-bottom: 1.5px solid #FFB947;
+  padding: 8px;
+  line-height: 35px;
+  margin-bottom: 20px;
+}
+
+.checkout-subprices p {
+  display: flex;
+  justify-content: space-between; /* Aligns label to the left and price to the right */
+  padding: 0px;
+}
+
+.checkout-label {
+  text-align: left;
+  font-size: 18px;
+}
+
+.checkout-price {
+  font-family: nunito, sans-serif;
+  text-align: right;
+  font-size: 18px;
+  color: #5D3F30
+}
+
+.checkout-total p {
+  display: flex;
+  justify-content: space-between;  /* Makes sure the label and price are on opposite sides */
+  padding: 0;
+  font-size: 20px;
+  color: #D95757;
+  padding: 0px 8px;
+  margin-bottom: 50px; /* Ensure there's no extra margin pushing things off */
+}
+
+.total-checkout-label {
+  text-align: left; /* This aligns the label to the left */
+}
+
+.total-checkout-price {
+  font-family: nunito, sans-serif;
+  text-align: right; /* This aligns the price to the right */
+}
 
 
+
+/* Payment Section */
+.checkout-summary h3 {
+  border-top: 1.5px solid #FFB947;
+  font-size: 24px;
+  padding: 30px 0;
+  color: #ff6f61
+}
+.payment-method label {
+  display: block;
+  margin-bottom: 10px;
+}
+
+.payment-method input[type="radio"] {
+  margin-right: 10px;
+}
+
+/* Checkbox Section */
+.checkbox.section {
+  margin-top: 20px;
+}
+
+.checkbox.section p {
+  font-size: 0.9rem;
+  color: #6f4d38;
+  margin: 10px 0;
+}
+
+.checkbox.section input {
+  margin-right: 10px;
+}
+
+/* Place Order Button */
+#place-order {
+  width: 100%;
+  padding: 15px;
+  font-size: 1.2rem;
+  font-weight: bold;
+  background-color: #f4c68d; /* Warm orange button */
+  border: none;
+  border-radius: 5px;
+  color: white;
+  cursor: pointer;
+}
+
+#place-order:hover {
+  background-color: #e3a971;
+}
+
+
+/* QR Code Section */
+.payment-method div {
+  display: flex;
+  justify-content: space-between;
+}
+
+.payment-method div img {
+  width: 80px;
+  height: 80px;
+  border: 1px solid #f1cda5;
+  border-radius: 5px;
+  padding: 5px;
+  background-color: #fff;
+}
 
 /* Story Section */
 .about-section {

@@ -223,9 +223,7 @@ function renderProductDetails(product) {
 
 // f: render checkout page
 function renderCheckoutSummary() {
-  console.log("Renderingggg checkout summary");
   const cartItemsContainer = document.getElementById("checkout-items");
-
   if (!cartItemsContainer) {
     console.error("Cart container not found!");
     return;
@@ -247,12 +245,19 @@ function renderCheckoutSummary() {
     productDetails.classList.add("checkout-details");
 
     const productName = document.createElement("p");
-    productName.textContent = `${item.name} x${item.quantity}`;
+    productName.textContent = `${item.name}`;
+    productName.classList.add("checkout-product-name");
+
+    const productQuantity = document.createElement("p");
+    productQuantity.textContent = `qty : ${item.quantity}`;
+    productQuantity.classList.add("product-subname");
 
     const productPrice = document.createElement("p");
     productPrice.textContent = `S$${(item.price * item.quantity).toFixed(2)}`;
+    productPrice.classList.add("checkout-product-price");
 
     productDetails.appendChild(productName);
+    productDetails.appendChild(productQuantity);
     productDetails.appendChild(productPrice);
 
     // Append elements to cart item

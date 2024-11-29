@@ -65,7 +65,7 @@
       <div class="heading-container">
         <h1>checkout</h1>
       </div>
-      <div class="cart-container">
+      <div class="checkout-container">
         <!-- Checkout Form Section -->
         <div class="checkout-left">
           <h2>shipping address</h2>
@@ -115,32 +115,50 @@
               </div>
             </div>
             
+          <div class="payment-container">
+            <p>PayNow / PayLah!</p>
+            <div class="qr-code-container" id="qr-code-container">
+              
+              <div id="paynow-qr" class="qr-code">
+                <img src="images/paynow.jpg" alt="PayNow QR Code">
+              </div>
 
-          <h3>payment method</h3>
-          <div>
-            <label for="paynow">PayNow / PayLah! (preferred)</label>
-            <div>
-              <input type="radio" id="paynow" name="payment-method" checked>
-              <label for="paynow">PayNow</label>
-              <input type="radio" id="credit-debit" name="payment-method">
-              <label for="credit-debit">Credit / Debit card</label>
+              <div id="paylah-qr" class="qr-code">
+                <img src="images/paylah.jpg" alt="PayLah QR Code">
+              </div>
+
             </div>
           </div>
-    
-          <div class="checkbox section">
-            <label>
-                <input type="checkbox" id="receive-emails" required>
-                I would like to receive emails updates & news
-            </label>
-            <p>Your personal data will be used to process your order, support your experience throughout this website, and for other purposes described in our <a href="#">privacy policy</a>.</p>
-            <label>
-              <input type="checkbox" id="terms-conditions" required>
-              I have read and agree to the <a href="#">terms and conditions</a>
+          
+
+        <div class="checkbox-section">
+
+          <div class="checkout-label-container">
+            <label class="custom-checkbox">
+              <input type="checkbox" id="receive-emails" required>
+              <span class="checkbox-icon">
+                <i class="far fa-square unchecked"></i>
+                <i class="fas fa-check-square checked"></i>
+              </span>
+              <h4>I would like to receive email updates & news</h4>
             </label>
           </div>
-    
-          <button id="place-order" class="btn">place order</button>
-        </div>
+
+          <p>Your personal data will be used to process your order, support your experience throughout this website, and for other purposes described in our <a href="#">privacy policy</a>.</p>
+
+          <div class="checkout-label-container">
+            <label class="custom-checkbox">
+              <input type="checkbox" id="terms-conditions" required>
+              <span class="checkbox-icon">
+                <i class="far fa-square unchecked"></i>
+                <i class="fas fa-check-square checked"></i>
+              </span>
+              <h4>I have read and agree to the <a href="#">terms and conditions</a></h4>
+            </label>
+          </div>
+      </div>
+      <a href="thankyou.html" class="checkout-button">place order</a>
+
       </div>
     </div>
   </main>

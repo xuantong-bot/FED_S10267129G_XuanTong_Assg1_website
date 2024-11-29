@@ -55,6 +55,7 @@ html {
   height: 45px;
   width: auto;
   padding: 5px 0px;
+  object-fit: contain;
   transition: transform 0.3s ease; /* Smooth scaling effect */
 }
 
@@ -71,10 +72,9 @@ html {
 
 .cart-menu {
   position: absolute;
-  top: 40px;
   right: 60px;
   display: flex; 
-  gap: 50px;
+  gap: 20px;
   align-items: center;
 }
 
@@ -90,9 +90,9 @@ html {
 }
 
 .cart-notification {
-  position: absolute;
-  top: -3px;
-  right: 75px;
+  position: relative;
+  top: -15px;
+  right: 25px;
   width: 18px;
   height: 18px;
   padding-top: 3px;
@@ -124,9 +124,9 @@ html {
 
 /* Dropdown Content */
 .dropdown-content {
-  visibility: hidden; /* Hide by default using visibility */
-  opacity: 0; /* Make invisible */
-  text-align: right; /* Align text to the left */
+  visibility: hidden; 
+  opacity: 0; 
+  text-align: right; 
   position: absolute;
   top: 40px; /* Position below the menu icon */
   right: 0;
@@ -342,16 +342,16 @@ html {
   background-color: #FFD2CB;
   padding: 2px 30px;
   border-radius: 30px;
-  width: 800px;
+  max-width: 800px;
   align-items: center; 
   align-self: center; 
   display: flex;
   margin-bottom: 0px;
+  overflow: hidden;
 
   opacity: 0;
   transform: translateY(-20px);
   transition: opacity 0.5s ease, transform 0.5s ease; /* Add transition for smooth movement */
-
 }
 
 .notification.visible {
@@ -410,18 +410,17 @@ html {
   gap: 20px;
 }
 
-
 .product-details-carousel-images {
   display: flex;
   cursor: pointer;
+
   transition: transform 0.3s ease-in-out; /* Smooth transition for sliding */
 }
 
 .product-details-carousel-images img {
-  width: 100%;
+  max-width: 100%;
   height: 100%;
   object-fit: cover;
-  flex-shrink: 0;
 }
 
 .arrow-button {
@@ -468,11 +467,9 @@ html {
   border: none;
   cursor: pointer;
   z-index: 1; 
-}
-
-.arrow-button {
   font-size: 20px;
 }
+
 
 .arrow-button.prev {
   left: 10px;
@@ -524,6 +521,7 @@ html {
 }
 
 .add-to-cart-button {
+  display: flex;
   background-color: #FFB947;
   color: #5D3F30;
   padding: 15px 80px;
@@ -552,7 +550,6 @@ html {
 
 .cart-container {
   display: flex;
-  flex-wrap: wrap;
   gap: 40px;
   justify-content: space-between;
   padding: 0px 50px;
@@ -631,8 +628,8 @@ html {
 .remove-button {
   background: none;
   border: none;
-  color: #f4736a;
-  font-size: 18px;
+  color: #ff6f61;
+  font-size: 16px;
   cursor: pointer;
   justify-content: flex-end; 
   align-self: flex-start;
@@ -696,8 +693,18 @@ html {
   margin-bottom: 20px;
 }
 
+#promo-code {
+  display: flex;
+  width: 100%;
+
+}
+
+#apply-promo {
+  align-items: center;
+}
+
 .promo-code input {
-  flex: 1;
+  display: flex;
   padding: 15px;
   border-radius: 30px;
   font-size: 14px;
@@ -712,6 +719,7 @@ html {
 }
 
 .promo-code button {
+  display: flex;
   background-color: #FFB947;
   color: #5D3F30;
   font-weight: bold;
@@ -750,6 +758,13 @@ html {
 }
 
 /*Checkout Section*/
+.checkout-container {
+  display: flex;
+  gap: 40px;
+  justify-content: space-between;
+  padding: 0px 50px;
+}
+
 /* Left Section - Shipping Form */
 .checkout-left {
   flex: 0 0 55%;
@@ -835,10 +850,13 @@ html {
 
 /* Right Section - Summary */
 .checkout-right {
-  flex: 1;
+  flex: 0 0 45%;
+  margin-top: 20px;
 }
 
 .checkout-summary {
+  display: flex;
+  flex-direction: column;
   padding: 30px 40px;
   border: 3px solid #FFB947;
   border-radius: 30px;
@@ -853,6 +871,7 @@ html {
 
 .checkout-item {
   display: flex;
+  flex-wrap: nowrap;
   align-items: center;
   width: 100%;
   border-bottom: 1.5px solid #FFB947;
@@ -898,14 +917,15 @@ html {
   color: #5D3F30
 }
 
+.checkout-total {
+  padding: 0px 8px;
+}
+
 .checkout-total p {
   display: flex;
-  justify-content: space-between;  /* Makes sure the label and price are on opposite sides */
-  padding: 0;
+  justify-content: space-between;  
   font-size: 20px;
   color: #D95757;
-  padding: 0px 8px;
-  margin-bottom: 50px; /* Ensure there's no extra margin pushing things off */
 }
 
 .total-checkout-label {
@@ -917,70 +937,110 @@ html {
   text-align: right; /* This aligns the price to the right */
 }
 
-
-
-/* Payment Section */
-.checkout-summary h3 {
-  border-top: 1.5px solid #FFB947;
-  font-size: 24px;
-  padding: 30px 0;
-  color: #ff6f61
-}
-.payment-method label {
-  display: block;
-  margin-bottom: 10px;
+/* QR Code Section */
+.payment-container {
+  display: flex;
+  justify-content: space-between;
+  flex-direction: column;
+  border-radius: 20px;
+  border: 2px solid #D95757;
+  padding: 10px 20px;
+  margin-top: 50px;
 }
 
-.payment-method input[type="radio"] {
-  margin-right: 10px;
+.payment-container p {
+  font-size: 14px;
+  color: #D95757;
+  font-weight: bold;
+  text-align: center;
+}
+
+.qr-code-container {
+  display: flex; 
+  justify-content: center;
+  gap: 40px;
+  flex-wrap: wrap;
+}
+
+.qr-code img {
+  width: 150px; 
+  height: auto;
+  border-radius: 10px;
 }
 
 /* Checkbox Section */
-.checkbox.section {
+.checkbox-section {
   margin-top: 20px;
+  padding: 0 10px; /* Add padding for smaller screens */
 }
 
-.checkbox.section p {
-  font-size: 0.9rem;
-  color: #6f4d38;
+.checkout-label-container h4 {
+  font-size: 14px;
+  color: #5D3F30;
+  padding: 10px 0;
+  line-height: 1.5; /* Improve readability on small screens */
+}
+
+.checkbox-section p {
+  font-size: 12px;
+  color: #5D3F30;
   margin: 10px 0;
+  line-height: 1.4;
 }
 
-.checkbox.section input {
-  margin-right: 10px;
+.checkbox-section a {
+  color: #D95757;
+  word-break: break-word; /* Ensure links break to the next line if too long */
 }
 
-/* Place Order Button */
-#place-order {
-  width: 100%;
-  padding: 15px;
-  font-size: 1.2rem;
-  font-weight: bold;
-  background-color: #f4c68d; /* Warm orange button */
-  border: none;
-  border-radius: 5px;
-  color: white;
-  cursor: pointer;
+.checkbox-section a:hover {
+  text-decoration: underline;
 }
 
-#place-order:hover {
-  background-color: #e3a971;
-}
-
-
-/* QR Code Section */
-.payment-method div {
+/* Custom Checkbox Styling */
+.custom-checkbox {
   display: flex;
-  justify-content: space-between;
+  align-items: center;
+  cursor: pointer;
+  color: #333;
+  margin-bottom: 10px;
+  font-size: 14px; /* Slightly smaller font size for mobile */
 }
 
-.payment-method div img {
-  width: 80px;
-  height: 80px;
-  border: 1px solid #f1cda5;
-  border-radius: 5px;
-  padding: 5px;
-  background-color: #fff;
+/* Hide the default checkbox input */
+.custom-checkbox input[type="checkbox"] {
+  display: none;
+}
+
+/* Icon container styling */
+.checkbox-icon {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 16px;
+  margin-right: 10px;
+  color: #D95757;
+  transition: color 0.3s ease;
+}
+
+/* By default, show the "unchecked" icon */
+.checkbox-icon .unchecked {
+  display: block;
+}
+
+/* Hide the "checked" icon by default */
+.checkbox-icon .checked {
+  display: none;
+}
+
+/* Toggling between checked and unchecked icons */
+.custom-checkbox input[type="checkbox"]:checked + .checkbox-icon .unchecked {
+  display: none;
+}
+
+.custom-checkbox input[type="checkbox"]:checked + .checkbox-icon .checked {
+  display: block;
+  color: #D95757;
 }
 
 /* Story Section */
@@ -1101,8 +1161,6 @@ html {
 }
 
 
-
-
 /* Responsive */
 @media (max-width: 768px) {
   .container {
@@ -1111,26 +1169,23 @@ html {
 
   /* Header */
   .header {
-    height: 100px; /* Adjust header height */
+    height: 120px; /* Adjust header height */
+    padding: 0px 10px; /* Adjust padding */
   }
 
-  .logo {
+  .logo img{
     max-height: 150px;         /* Adjust the height */
     max-width: 200px;          /* Adjust the width */
   }
 
   .cart-menu {
-    display: flex;        /* Align items horizontally */
-    right: 25px;          /* Distance from the right edge */
-    bottom: 60px;         /* Distance from the bottom edge */
-    gap: 30px;            /* Space between items */
+    right: 20px; /* Adjust the position */
+    gap: 10px;            /* Space between items */
   }
-
-  
 
   /* Hero Section */
   .hero-section {
-    padding: 20px 20px;
+    padding: 20px 10px;
   }
 
   .split {
@@ -1152,12 +1207,12 @@ html {
   /* Bestsellers Section */
   .heading-container h2 {
     font-size: 30px;
-    margin-bottom: 0px;
+    margin-bottom: 30px;
   }
 
   .products-container {
-    gap: 15px;
-    justify-content: center;
+    padding: 0px 10px;
+    gap: 5px;
   }
 
   .product-card {
@@ -1166,7 +1221,7 @@ html {
   }
 
   .product-image-container {
-    height: 70%;
+    height: auto;
     width: 100%;
   }
 
@@ -1179,25 +1234,78 @@ html {
   }
 
   /* Product details section */
+  .product-details-carousel {
+    width: 100%;
+    
+  }
+  .product-details-section {
+    display: flex;
+    padding: 0px 20px;
+    justify-content: center;
+  }
+
   .product-details{
     flex-direction: column;
     gap: 20px;
   }
 
+  .add-to-cart-button {
+    justify-content: center;
+    border: 2px solid #5D3F30;
+    padding: 20px 50px;
+  }
+
+
+  .notification p {
+    font-size: 14px;
+    text-align: center;
+  }
+
+  .view-cart-button {
+    display: flex;
+    width: 50%;
+    padding: 8px;
+    border-radius: 30px;
+    justify-content: center;
+  }
+  
   /*cart*/
   .cart-container {
     flex-direction: column;
     justify-content: center;
+    align-items: center;
   }
 
-  .cart-list,
-  .cart-summary {
-      width: 100%;
-      margin: 10px 0;
+  .cart-heading-container {
+    font-size: 30px;
+    text-align: center;
   }
 
-  .cart-summary {
-      margin-top: 20px;
+  .cart-notification {
+    right: 15px;
+  }
+
+  /* Checkout Section */
+  .checkout-container {
+    flex-direction: column;
+    padding: 20px;
+  }
+
+  .checkout-summary {
+    width: 100%;
+    padding: 20px 40px;
+  }
+
+  .qr-code-container img{
+    width: 100%;
+  }
+
+  .custom-checkbox {
+    font-size: 12px; /* Reduce font size for small screens */
+  }
+
+  .checkbox-icon {
+    font-size: 14px; /* Scale icons down slightly */
   }
 
 
@@ -1214,10 +1322,11 @@ html {
   .story-container {
     flex-direction: column; /* Stacks elements vertically */
     align-items: center; /* Center-align content */
+    padding: 10px;
   }
 
   .story-image {
-    height: 300px; /* Set a fixed height */
+    height: auto; /* Set a fixed height */
     width: 100%; /* Allow the width to adjust to the container */
   }
   

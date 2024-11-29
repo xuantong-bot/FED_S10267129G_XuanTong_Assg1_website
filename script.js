@@ -66,12 +66,12 @@ document.addEventListener("DOMContentLoaded", () => {
   if (document.getElementById("cart-items")) {
     renderCartItems();
   }
+
   // Only render checkout summary if on checkout page
   if (document.getElementById("checkout-summary")) {
     console.log("Rendering checkout summary");
     renderCheckoutSummary();
-  }
-  else {
+  } else {
     console.log("Not on checkout page");
   }
 });
@@ -268,8 +268,6 @@ function renderCheckoutSummary() {
 
   updateCheckoutTotal();
 }
-
-
 
 // f: setup cart functions
 function setupCartFunctions(product) {

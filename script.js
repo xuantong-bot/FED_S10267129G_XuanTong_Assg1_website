@@ -61,7 +61,7 @@ const products = {
     price: 54.00,
     description: "A beautiful mellow yellow bag made from soft cotton fabric, perfect for your bag collection.",
     category: ["shop-all", "bouquets", "bestsellers"],
-    images: ["bouquets/mellow-yellow.jpg", "bouquets/mellow-yellow.jpg", "nouquets/mellow-yellow.jpg"]
+    images: ["bouquets/mellow-yellow.jpg", "bouquets/mellow-yellow.jpg", "bouquets/mellow-yellow.jpg"]
   },
 };
 
@@ -77,7 +77,6 @@ document.addEventListener("DOMContentLoaded", () => {
 
   // Render the product list if on the product-list page
   if (category) {
-    console.log("Rendering products for category:", category);
     renderProductList(category); // Call the function to render products based on category
   }
 
@@ -104,7 +103,6 @@ document.addEventListener("DOMContentLoaded", () => {
 
   // Only render checkout summary if on checkout page
   if (document.getElementById("checkout-summary")) {
-    console.log("Rendering checkout summary");
     renderCheckoutSummary();
   } 
 });
@@ -126,14 +124,15 @@ function createElement(tag, options = {}) {
 
 // f: render products list
 function renderProductList(category) {
+  const formattedCategory = category.replace(/-/g, ' ');  // Replace all dashes with spaces
   const container = document.getElementById("product-list-container");  // Reference the container div
 
   // Create and display the heading
   const sectionHeading = document.createElement('h2');
-  sectionHeading.textContent = category;  
+  sectionHeading.textContent = formattedCategory;
   sectionHeading.classList.add('heading-container');
 
-  // Create the anchor element
+  // Create the anchor element for the heading
   const headingLink = document.createElement('a');
   headingLink.href = `product-list.html?category=${category}`; // Set the link to the appropriate page
 
@@ -143,10 +142,44 @@ function renderProductList(category) {
   // Append the anchor to the container
   container.appendChild(headingLink);
 
+  const filterContainer = document.createElement('div');
+  filterContainer.classList.add('filter-container');
+  
+  const priceFilterDropdown = document.createElement('select');
+  priceFilterDropdown.classList.add('price-filter-dropdown');
+  priceFilterDropdown.id = 'priceFilter';
+  
+  // Create and append option elements without innerHTML
+  const defaultOption = document.createElement('option');
+  defaultOption.value = 'default';
+  defaultOption.textContent = 'sort by price';
+  priceFilterDropdown.appendChild(defaultOption);
+
+  const lowToHighOption = document.createElement('option');
+  lowToHighOption.value = 'low-to-high';
+  lowToHighOption.textContent = 'lowest to highest';
+  priceFilterDropdown.appendChild(lowToHighOption);
+
+  const highToLowOption = document.createElement('option');
+  highToLowOption.value = 'high-to-low';
+  highToLowOption.textContent = 'highest to lowest';
+  priceFilterDropdown.appendChild(highToLowOption);
+  
+  // Event listener for filter change
+  priceFilterDropdown.addEventListener('change', () => {
+    filterProductsByPrice(priceFilterDropdown.value);
+  });
+
+  filterContainer.appendChild(priceFilterDropdown);
+  container.appendChild(filterContainer);  // Append the filter below the heading
+
   // Get the products container to load products
   const productsContainer = document.createElement('div');
   productsContainer.classList.add('products-container');
   container.appendChild(productsContainer);
+
+  // Create a document fragment for better performance
+  const fragment = document.createDocumentFragment();
 
   // Loop through the products in the selected category
   const selectedProducts = [];
@@ -160,6 +193,14 @@ function renderProductList(category) {
       selectedProducts.push(product);
     }
   });
+
+  // Handle case when no products are found
+  if (selectedProducts.length === 0) {
+    const noProductsMessage = document.createElement('p');
+    noProductsMessage.textContent = 'No products found in this category.';
+    productsContainer.appendChild(noProductsMessage);
+    return;
+  }
 
   // Loop to create product cards
   selectedProducts.forEach(product => {
@@ -198,17 +239,19 @@ function renderProductList(category) {
     // Append all elements to the product link
     productLink.appendChild(productImageContainer);
     productLink.appendChild(productName);
+    productLink.appendChild(productSubname);  // Optional, if you want to show subname
     productLink.appendChild(productPrice);
     
     // Append the product link to the product card
     productCard.appendChild(productLink);
     
-    // Append the product card to the products container
-    productsContainer.appendChild(productCard);
+    // Append the product card to the document fragment
+    fragment.appendChild(productCard);
   });
+
+  // Append the fragment to the products container (this appends all at once)
+  productsContainer.appendChild(fragment);
 }
-
-
 
 
 // f: render cart items
@@ -611,6 +654,5 @@ function highlightThumbnail(index) {
   thumbnails[index].classList.add("active-thumbnail");
 }
 
-// f: update breadcrumb
 
 console.log("script.js loaded");

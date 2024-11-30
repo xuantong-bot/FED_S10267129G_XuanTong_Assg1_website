@@ -23,8 +23,8 @@
           <i class="fa-solid fa-cart-shopping"></i>
         </a>
 
-         <!-- Notification element -->
-         <div id="cart-notification" class="cart-notification">
+        <!-- Notification element -->
+        <div id="cart-notification" class="cart-notification">
           <span id="cart-count">0</span>
         </div>
 
@@ -45,20 +45,6 @@
     </div>
   </header>
 
-  <!-- Breadcrumb -->
-  <div class="breadcrumb-container">
-    <ul class="breadcrumb">
-      <li><a href="index.html">home</a></li>
-      <span>/</span>
-      <li><a href="index.html">home</a></li>
-      <span>/</span>
-      <li id="breadcrumb-category-container"></li>
-      <span id="breadcrumb-separator" style="display: none;">/</span>
-      <li id="breadcrumb-product-container"></li>
-    </ul>
-  </div>
-  
-
   <!-- main Content -->
   <main>
     <section class="product-details-section">
@@ -69,7 +55,7 @@
             <p><strong id="notification-name">"product name"</strong> has been added to your cart!</p>
             <a href="cart.html" class="view-cart-button">view cart</a>
           </div>
-      </div>
+        </div>
 
         <div class="product-details" id="product-details">
 
@@ -85,11 +71,11 @@
               </button>
             </div>
             <div class="carousel-thumbnails" id="carousel-thumbnails"></div>
-            
+
 
             <!-- thumbnail -->
             <div class="carousel-thumbnails" id="carousel-thumbnails"></div>
-        </div>
+          </div>
           <!-- right section -->
           <div class="product-info">
             <h2 id="product-name" class="product-details-name">product Name</h2>
@@ -101,9 +87,9 @@
                 <button class="decrement" id="decrement">-</button>
                 <span class="quantity-display" id="quantity">1</span>
                 <button class="increment" id="increment">+</button>
-            </div>
-            <button class="add-to-cart-button" id="add-to-cart" onclick="addToCart()">add to cart</button>
-            
+              </div>
+              <button class="add-to-cart-button" id="add-to-cart" onclick="addToCart()">add to cart</button>
+
             </div>
           </div>
         </div>
@@ -112,7 +98,7 @@
   </main>
 
   <!-- Footer -->
-  <footer class="footer" id="contact-us">
+  <footer class="footer">
     <div class="container">
       <div class="footer-social">
         <a href="https://twitter.com" target="_blank" class="social-icon">
@@ -122,7 +108,7 @@
           <i class="fa-brands fa-instagram"></i>
         </a>
       </div>
-      <div class="footer-links">
+      <div class="footer-links" id="contact-us">
         <ul>
           <li><a href="product-list.html?category=shop-all">shop all</a></li>
           <li><a href="product-list.html?category=bestsellers">bestsellers</a></li>
@@ -140,7 +126,7 @@
       </div>
     </div>
   </footer>
-  
+
   <script src="script.js"></script>
 </body>
 

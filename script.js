@@ -7,7 +7,7 @@ const products = {
     price: 6.00, 
     description: "A beautiful green pea scrunchie made from soft cotton fabric, perfect for your hair accessories collection.",
     category: "scrunchies",
-    images: ["scrunchies/green pea.jpg", "scrunchies/green pea 2.jpg", "scrunchies/green pea 3.jpg"]
+    images: ["scrunchies/green-pea.jpg", "scrunchies/green-pea2.jpg", "scrunchies/green-pea3.jpg"]
   },
   "s-sunlit-meadow": {
     id: "s-sunlit-meadow",
@@ -16,7 +16,7 @@ const products = {
     price: 7.00,
     description: "A beautiful sunlit meadow scrunchie made from soft cotton fabric, perfect for your hair accessories collection.",
     category: "scrunchies",
-    images: ["scrunchies/sunlit meadow.jpg", "scrunchies/sunlit meadow 2.jpg", "scrunchies/sunlit meadow 3.jpg"]
+    images: ["scrunchies/sunlit-meadow.jpg", "scrunchies/sunlit-meadow2.jpg", "scrunchies/sunlit-meadow3.jpg"]
   },
   "s-lavender-mist": {
     id: "s-lavender-mist",
@@ -25,7 +25,7 @@ const products = {
     price: 6.00,
     description: "A beautiful lavender mist scrunchie made from soft cotton fabric, perfect for your hair accessories collection.",
     category: "scrunchies",
-    images: ["scrunchies/lavender mist.jpg", "scrunchies/lavender mist 2.jpg", "scrunchies/lavender mist 3.jpg"]
+    images: ["scrunchies/lavender-mist.jpg", "scrunchies/lavender-mist2.jpg", "scrunchies/lavender-mist3.jpg"]
   },
   "s-marshmallow": {
     id: "s-marshmallow",
@@ -34,7 +34,16 @@ const products = {
     price: 6.00,
     description: "A beautiful marshmallow scrunchie made from soft cotton fabric, perfect for your hair accessories collection.",
     category: "scrunchies",
-    images: ["scrunchies/marshmallow.jpg", "scrunchies/marshmallow 2.jpg", "scrunchies/marshmallow 3.jpg"]
+    images: ["scrunchies/marshmallow.jpg", "scrunchies/marshmallow-2.jpg", "scrunchies/marshmallow-3.jpg"]
+  },
+  "s-cotton-candy": {
+    id: "s-cotton-candy",
+    name: "cotton candy",
+    subname: "scrunchie",
+    price: 8.00,
+    description: "A beautiful cotton candy scrunchie made from soft cotton fabric, perfect for your hair accessories collection.",
+    category: "scrunchies",
+    images: ["scrunchies/cotton-candy.jpg", "scrunchies/cotton-candy.jpg", "scrunchies/cotton-candy.jpg"]
   }
 };
 
@@ -74,6 +83,8 @@ document.addEventListener("DOMContentLoaded", () => {
   } else {
     console.log("Not on checkout page");
   }
+
+  updateBreadcrumbByPage();
 });
 
 // Helper functions for DOM manipulation
@@ -386,7 +397,7 @@ function setupQuantityButtons(incrementButton, decrementButton, quantityDisplay,
   return () => quantity; // Return a function to get the current quantity
 }
 
-// function to update the cart notification
+// f: update the cart notification
 function updateCartNotification() {
 
   const cartCount = cart.reduce((total, item) => total + item.quantity, 0); // Calculate the total number of items in the cart
@@ -395,7 +406,7 @@ function updateCartNotification() {
 
   cartCountElement.textContent = cartCount; // Update the count in the notification
 
-  // Show notification if cart is not empty
+  // show notification if cart is not empty
   if (cartCount > 0) {
     cartNotification.classList.add("visible");
   } else {
@@ -415,7 +426,7 @@ function showCartNotification(product, quantity) {
   setTimeout(() => notification.classList.remove("visible"), 3000);
 }
 
-// carousel setup
+// f: carousel setup
 function setupCarousel(images) {
   const carouselImages = document.getElementById("carousel-images");
   const carouselThumbnails = document.getElementById("carousel-thumbnails");
@@ -452,6 +463,7 @@ function setupCarousel(images) {
   });
 }
 
+// f: change slide (carousel)
 function changeSlide(index) {
   const images = document.querySelectorAll("#carousel-images img");
   const offset = index * -100; // Calculate translation
@@ -476,5 +488,54 @@ function highlightThumbnail(index) {
   thumbnails.forEach((thumb) => thumb.classList.remove("active-thumbnail"));
   thumbnails[index].classList.add("active-thumbnail");
 }
+
+// f: update breadcrumb
+function updateBreadcrumbByPage() {
+  const breadcrumbCategoryContainer = document.getElementById("breadcrumb-category-container");
+  const breadcrumbProductContainer = document.getElementById("breadcrumb-product-container");
+  const breadcrumbSeparator = document.getElementById("breadcrumb-separator");
+
+  const pageType = document.body.dataset.pageType; // Assume pages have a data attribute indicating type
+  const urlParams = new URLSearchParams(window.location.search);
+
+  // Handle category pages
+  if (pageType === "category") {
+    const category = urlParams.get("category");
+    if (category) {
+      breadcrumbCategoryContainer.innerHTML = `<a href="category.html?category=${category}">${decodeURIComponent(category).replace(/-/g, " ")}</a>`;
+    }
+  }
+
+  // Handle product pages
+  if (pageType === "product") {
+    const category = urlParams.get("category");
+    const productName = urlParams.get("name");
+
+    // Update category breadcrumb if available
+    if (category) {
+      breadcrumbCategoryContainer.innerHTML = `<a href="category.html?category=${category}">${decodeURIComponent(category).replace(/-/g, " ")}</a>`;
+    }
+
+    // Update product breadcrumb if available
+    if (productName) {
+      breadcrumbSeparator.style.display = "inline";
+      breadcrumbProductContainer.textContent = decodeURIComponent(productName).replace(/-/g, " ");
+    }
+  }
+
+  // Hide breadcrumb sections that are not relevant
+  if (!breadcrumbCategoryContainer.innerHTML) {
+    breadcrumbCategoryContainer.style.display = "none";
+  }
+  if (!breadcrumbProductContainer.innerHTML) {
+    breadcrumbSeparator.style.display = "none";
+    breadcrumbProductContainer.style.display = "none";
+  }
+}
+
+
+
+
+
 
 console.log("script.js loaded");

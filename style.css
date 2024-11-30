@@ -194,12 +194,11 @@ html {
   color: #D95757; /* Use the same color for the separators */
 }
 
-.breadcrumb .current-page {
+.breadcrumb .breadcrumb-product-name {
   color: #ff6f61; /* Highlight the current page */
   font-weight: 600;
   opacity: 0.7; /* Optional: slightly dim the current page for better contrast */
 }
-
 
 /* Hero Section */
 .hero-section .container {
@@ -1181,6 +1180,20 @@ html {
   .cart-menu {
     right: 20px; /* Adjust the position */
     gap: 10px;            /* Space between items */
+  }
+
+  .breadcrumb {
+    font-size: 12px; /* Smaller font size for mobile */
+    padding: 0px 10px; /* Less padding for smaller screens */
+  }
+
+  .breadcrumb a {
+    font-size: 12px; /* Smaller font size for links on mobile */
+    padding: 3px; /* Less padding for smaller screens */
+  }
+
+  .breadcrumb span {
+    font-size: 12px; /* Smaller separator for mobile */
   }
 
   /* Hero Section */

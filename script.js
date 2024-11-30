@@ -6,7 +6,7 @@ const products = {
     subname: "scrunchie",
     price: 6.00, 
     description: "A beautiful green pea scrunchie made from soft cotton fabric, perfect for your hair accessories collection.",
-    category: "scrunchies",
+    category: ["shop-all", "scrunchies", "bestsellers"],
     images: ["scrunchies/green-pea.jpg", "scrunchies/green-pea2.jpg", "scrunchies/green-pea3.jpg"]
   },
   "s-sunlit-meadow": {
@@ -15,7 +15,7 @@ const products = {
     subname: "scrunchie",
     price: 7.00,
     description: "A beautiful sunlit meadow scrunchie made from soft cotton fabric, perfect for your hair accessories collection.",
-    category: "scrunchies",
+    category: ["shop-all", "scrunchies", "bestsellers"],
     images: ["scrunchies/sunlit-meadow.jpg", "scrunchies/sunlit-meadow2.jpg", "scrunchies/sunlit-meadow3.jpg"]
   },
   "s-lavender-mist": {
@@ -24,7 +24,7 @@ const products = {
     subname: "scrunchie",
     price: 6.00,
     description: "A beautiful lavender mist scrunchie made from soft cotton fabric, perfect for your hair accessories collection.",
-    category: "scrunchies",
+    category: ["shop-all", "scrunchies"],
     images: ["scrunchies/lavender-mist.jpg", "scrunchies/lavender-mist2.jpg", "scrunchies/lavender-mist3.jpg"]
   },
   "s-marshmallow": {
@@ -33,7 +33,7 @@ const products = {
     subname: "scrunchie",
     price: 6.00,
     description: "A beautiful marshmallow scrunchie made from soft cotton fabric, perfect for your hair accessories collection.",
-    category: "scrunchies",
+    category: ["shop-all", "scrunchies"],
     images: ["scrunchies/marshmallow.jpg", "scrunchies/marshmallow-2.jpg", "scrunchies/marshmallow-3.jpg"]
   },
   "s-cotton-candy": {
@@ -42,9 +42,27 @@ const products = {
     subname: "scrunchie",
     price: 8.00,
     description: "A beautiful cotton candy scrunchie made from soft cotton fabric, perfect for your hair accessories collection.",
-    category: "scrunchies",
+    category: ["shop-all", "scrunchies", "bestsellers"],
     images: ["scrunchies/cotton-candy.jpg", "scrunchies/cotton-candy.jpg", "scrunchies/cotton-candy.jpg"]
-  }
+  },
+  "k-flower-power": {
+    id: "k-flower-power",
+    name: "flower power",
+    subname: "keychain",
+    price: 15.00,
+    description: "A beautiful flower power keychain made from soft cotton fabric, perfect for your keychain collection.",
+    category: ["shop-all", "keychains", "bestsellers"],
+    images: ["keychains/flower-power.jpg", "keychains/flower-power.jpg", "keychains/flower-power.jpg"]
+  },
+  "b-mellow-yellow": {
+    id: "b-mellow-yellow",
+    name: "mellow yellow",
+    subname: "bouquet",
+    price: 54.00,
+    description: "A beautiful mellow yellow bag made from soft cotton fabric, perfect for your bag collection.",
+    category: ["shop-all", "bouquets", "bestsellers"],
+    images: ["bouquets/mellow-yellow.jpg", "bouquets/mellow-yellow.jpg", "nouquets/mellow-yellow.jpg"]
+  },
 };
 
 // Globals
@@ -54,7 +72,15 @@ let cart = JSON.parse(localStorage.getItem("cart")) || [];
 document.addEventListener("DOMContentLoaded", () => {
   const urlParams = new URLSearchParams(window.location.search);
   const productId = urlParams.get("id");
+  const category = urlParams.get("category"); // Get the category from URL
   updateCartNotification();
+
+  // Render the product list if on the product-list page
+  if (category) {
+    console.log("Rendering products for category:", category);
+    renderProductList(category); // Call the function to render products based on category
+  }
+
   if (productId && products[productId]) {
     // If on a product page, render the product details
     const product = products[productId];
@@ -80,12 +106,9 @@ document.addEventListener("DOMContentLoaded", () => {
   if (document.getElementById("checkout-summary")) {
     console.log("Rendering checkout summary");
     renderCheckoutSummary();
-  } else {
-    console.log("Not on checkout page");
-  }
-
-  updateBreadcrumbByPage();
+  } 
 });
+
 
 // Helper functions for DOM manipulation
 function createElement(tag, options = {}) {
@@ -100,6 +123,93 @@ function createElement(tag, options = {}) {
 
   return element;
 }
+
+// f: render products list
+function renderProductList(category) {
+  const container = document.getElementById("product-list-container");  // Reference the container div
+
+  // Create and display the heading
+  const sectionHeading = document.createElement('h2');
+  sectionHeading.textContent = category;  
+  sectionHeading.classList.add('heading-container');
+
+  // Create the anchor element
+  const headingLink = document.createElement('a');
+  headingLink.href = `product-list.html?category=${category}`; // Set the link to the appropriate page
+
+  // Append the heading to the anchor
+  headingLink.appendChild(sectionHeading);
+
+  // Append the anchor to the container
+  container.appendChild(headingLink);
+
+  // Get the products container to load products
+  const productsContainer = document.createElement('div');
+  productsContainer.classList.add('products-container');
+  container.appendChild(productsContainer);
+
+  // Loop through the products in the selected category
+  const selectedProducts = [];
+  Object.keys(products).forEach(key => {
+    const product = products[key];
+    if (Array.isArray(product.category)) {
+      if (product.category.includes(category)) {
+        selectedProducts.push(product);
+      }
+    } else if (product.category === category) {
+      selectedProducts.push(product);
+    }
+  });
+
+  // Loop to create product cards
+  selectedProducts.forEach(product => {
+    // Create product card container
+    const productCard = document.createElement('div');
+    productCard.classList.add('product-card');
+    
+    // Create product link
+    const productLink = document.createElement('a');
+    productLink.href = `product.html?id=${product.id}`;
+    productLink.classList.add('product-link');
+    
+    // Create image container and image element
+    const productImageContainer = document.createElement('div');
+    productImageContainer.classList.add('product-image-container');
+    const productImage = document.createElement('img');
+    productImage.src = product.images[0];
+    productImage.alt = product.name;
+    productImage.classList.add('product-image');
+    productImageContainer.appendChild(productImage);
+    
+    // Create product name element
+    const productName = document.createElement('p');
+    productName.classList.add('product-name');
+    productName.textContent = product.name;
+
+    const productSubname = document.createElement('p');
+    productSubname.classList.add('product-subname');
+    productSubname.textContent = product.subname;
+    
+    // Create product price element
+    const productPrice = document.createElement('p');
+    productPrice.classList.add('product-price');
+    productPrice.textContent = `S$${product.price.toFixed(2)}`;
+    
+    // Append all elements to the product link
+    productLink.appendChild(productImageContainer);
+    productLink.appendChild(productName);
+    productLink.appendChild(productPrice);
+    
+    // Append the product link to the product card
+    productCard.appendChild(productLink);
+    
+    // Append the product card to the products container
+    productsContainer.appendChild(productCard);
+  });
+}
+
+
+
 
 // f: render cart items
 function renderCartItems() {
@@ -126,7 +236,7 @@ function renderCartItems() {
     // Product Image
     const productImage = document.createElement("img");
     productImage.classList.add("cart-product-image");
-    productImage.src = item.images && item.images.length > 0 ? item.images[0] : "scrunchies/cute one.jpg";
+    productImage.src = item.images && item.images.length > 0 ? item.images[0] : "scrunchies/cotton-candy.jpg";
     productImage.alt = item.images && item.images.length > 0 ? item.name : "No image available";
 
     // Product Details 
@@ -417,13 +527,25 @@ function updateCartNotification() {
 // f: show notification in product.html
 function showCartNotification(product, quantity) {
   const notification = document.querySelector(".notification");
+  const body = document.body; 
+  const notificationContainer = document.querySelector(".notification-container");  // To find the notification container
+
   if (notification.classList.contains("visible")) {
     notification.classList.remove("visible");
   }
+
   document.getElementById("notification-name").textContent = `"${product.name}" x${quantity}`;
   notification.classList.add("visible");
 
-  setTimeout(() => notification.classList.remove("visible"), 3000);
+  window.scrollTo({
+    top: 0,  
+    behavior: "smooth"
+  });
+
+  setTimeout(() => {
+    notification.classList.remove("visible");
+    body.classList.remove("notification-visible"); // Remove the space after notification disappears
+  }, 4000);
 }
 
 // f: carousel setup
@@ -490,52 +612,5 @@ function highlightThumbnail(index) {
 }
 
 // f: update breadcrumb
-function updateBreadcrumbByPage() {
-  const breadcrumbCategoryContainer = document.getElementById("breadcrumb-category-container");
-  const breadcrumbProductContainer = document.getElementById("breadcrumb-product-container");
-  const breadcrumbSeparator = document.getElementById("breadcrumb-separator");
-
-  const pageType = document.body.dataset.pageType; // Assume pages have a data attribute indicating type
-  const urlParams = new URLSearchParams(window.location.search);
-
-  // Handle category pages
-  if (pageType === "category") {
-    const category = urlParams.get("category");
-    if (category) {
-      breadcrumbCategoryContainer.innerHTML = `<a href="category.html?category=${category}">${decodeURIComponent(category).replace(/-/g, " ")}</a>`;
-    }
-  }
-
-  // Handle product pages
-  if (pageType === "product") {
-    const category = urlParams.get("category");
-    const productName = urlParams.get("name");
-
-    // Update category breadcrumb if available
-    if (category) {
-      breadcrumbCategoryContainer.innerHTML = `<a href="category.html?category=${category}">${decodeURIComponent(category).replace(/-/g, " ")}</a>`;
-    }
-
-    // Update product breadcrumb if available
-    if (productName) {
-      breadcrumbSeparator.style.display = "inline";
-      breadcrumbProductContainer.textContent = decodeURIComponent(productName).replace(/-/g, " ");
-    }
-  }
-
-  // Hide breadcrumb sections that are not relevant
-  if (!breadcrumbCategoryContainer.innerHTML) {
-    breadcrumbCategoryContainer.style.display = "none";
-  }
-  if (!breadcrumbProductContainer.innerHTML) {
-    breadcrumbSeparator.style.display = "none";
-    breadcrumbProductContainer.style.display = "none";
-  }
-}
-
-
-
-
-
 
 console.log("script.js loaded");

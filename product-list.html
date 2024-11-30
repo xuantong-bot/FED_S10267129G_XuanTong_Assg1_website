@@ -1,15 +1,13 @@
 <!DOCTYPE html>
 <html lang="en">
-
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Hooked on Loops - Product</title>
+  <title>Hooked on Loops</title>
   <link href="https://fonts.googleapis.com/css2?family=Comfortaa:wght@400;700&family=Nunito:wght@400;700&display=swap" rel="stylesheet">
-  <link rel="stylesheet" href="style.css">
   <script src="https://kit.fontawesome.com/c0e5014365.js" crossorigin="anonymous"></script>
+  <link rel="stylesheet" href="style.css">
 </head>
-
 <body>
   <!-- Header -->
   <header class="header">
@@ -17,17 +15,21 @@
       <a href="index.html" class="logo-link">
         <img src="images/logo.png" alt="Logo" class="logo">
       </a>
+
       <div class="cart-menu">
         <a href="cart.html" class="cart-icon-link">
           <i class="fa-solid fa-cart-shopping"></i>
         </a>
+
         <!-- Notification element -->
         <div id="cart-notification" class="cart-notification">
           <span id="cart-count">0</span>
         </div>
-        <!-- Menu Dropdown -->
+
         <div class="menu-dropdown">
-          <i class="fa-solid fa-bars"></i>
+          <a href="#" class="menu-icon-link">
+            <i class="fa-solid fa-bars"></i>
+          </a>
           <div class="dropdown-content">
             <a href="product-list.html?category=shop-all" class="menu-link">shop all</a>
             <a href="product-list.html?category=bestsellers" class="menu-link">bestsellers</a>
@@ -42,50 +44,25 @@
     </div>
   </header>
 
-  <!-- Breadcrumb -->
+  <!-- Breadcrumbs -->
   <div class="breadcrumb-container">
     <ul class="breadcrumb">
       <li><a href="index.html">home</a></li>
       <span>/</span>
-      <li><a href="#" id="breadcrumb-category">category</a></li>
-      <span>/</span>
-      <li><a href="#" id="breadcrumb-product">product name</a></li>
-      <span>/</span>
-      <li class="current-page" id="breadcrumb-cart"><a href="#">cart</a></li>
+      <li><a href="product-list.html" class="current-page" id="category-name">category</a></li>
     </ul>
   </div>
 
   <!-- Main Content -->
   <main>
-    <div class="container">
-      <h1 class="cart-heading-container">your cart</h1>
-      <div class="cart-container">
-        <div class="cart-items-section">
-          <div id="cart-items" class="cart-items">
-            <!-- Product items will be dynamically inserted here -->
-          </div>
-        </div>
-        <!-- Cart Summary Section -->
-        <div class="cart-summary">
-          <h2>promo code:</h2>
-          
-          <div class="summary-details">
-            <div class="promo-code">
-              <input type="text" id="promo-code" placeholder="type here..." autocomplete="off" />
-              <button id="apply-promo" class="apply-button">apply</button>
-            </div>
-
-            <div class="cart-subprices">
-              <p>subtotal: <span id="subtotal" class="product-price">S$0.00</span></p>
-              <p>discount: <span id="discount" class="product-price">S$0.00</span></p>
-            </div>
-            <p><strong>Total:</strong> <span id="total" class="cart-total">S$0.00</span></p>
-          </div>
-          <a href="checkout.html" class="checkout-button">proceed to checkout</a>
-        </div>
+    <section class="product-list-section">
+      <div class="container" id="product-list-container">
+        <!-- The heading will be dynamically added here -->
+        <div class="products-container" id="products-container"></div> 
       </div>
-    </div>
+    </section>
   </main>
+  
 
   <!-- Footer -->
   <footer class="footer" id="contact-us">
@@ -98,6 +75,7 @@
           <i class="fa-brands fa-instagram"></i>
         </a>
       </div>
+
       <div class="footer-links">
         <ul>
           <li><a href="product-list.html?category=shop-all">shop all</a></li>
@@ -108,17 +86,9 @@
           <li><a href="index.html#our-story">our story</a></li>
         </ul>
       </div>
-      <div class="footer-contact">
-        <ul>
-          <li><a href="mailto:hookedonloopssg@gmail.com">hookedonloopssg@gmail.com</a></li>
-          <li><a href="tel:+6598765432">+65 9876 5432</a></li>
-        </ul>
-      </div>
     </div>
   </footer>
 
-  <!-- JavaScript -->
   <script src="script.js"></script>
 </body>
-
 </html>

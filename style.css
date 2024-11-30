@@ -34,11 +34,11 @@ html {
   display: flex;
   flex-direction: column;
   justify-content: center;
-  max-width: 1200px;
+  max-width: 100%;
   width: 100%;
   margin: 0 auto;
   padding: 50px 20px;
-  box-sizing: border-box; /* Include padding in the width */
+  overflow-x: hidden;
 }
 
 /* Header */
@@ -254,39 +254,43 @@ html {
 }
 
 .shop-now-button:hover {
-  border-color:#FFB947;        /* Change the border color */
-  transform: scale(1.1);        /* Slightly enlarge the button */
+  border-color:#FFB947;       
+  transform: scale(1.1);        
 }
 
-/* Bestsellers Section */
+/* product list section */
 .heading-container {
   display: flex;
   justify-content: center;
   align-items: center;
   flex-direction: column;
-}
-
-.heading-container h2 {
   font-size: 40px;
   text-align: center;
-  padding: 0px 10px;
+  padding: 15px 10px;
+}
+
+#product-list-container {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
 }
 
 .products-container {
   display: flex;
-  flex-wrap: wrap;
+  flex-wrap: wrap; /* Allow rows to wrap */
+  justify-content: flex-start; /* Center the group of rows horizontally */
+  align-content: center; 
   gap: 40px;
-  justify-content: space-between;
+  padding: 0px 50px;
 }
 
 .product-card {
   display: flex;
   flex-direction: column;
-  text-align: left;
-  width: 250px;
+  width: 250px; /* Set a consistent width for product cards */
   height: auto;
   cursor: pointer;
-  overflow: hidden; /* Ensures the image stays within the box */
 }
 
 .product-image-container {
@@ -299,7 +303,7 @@ html {
 .product-image {
   width: 100%; /* Ensure the image takes up the full width of the container */
   height: 100%; /* Fixed height for the image */
-  object-fit: cover; /* Crop if necessary to fill the space */
+  object-fit: cover; /* Crop the image to fit the container */
   transition: transform 0.3s ease; /* Smooth zoom-in animation */
 }
 
@@ -330,45 +334,56 @@ html {
 }
 
 /* Product details section */
-.product-detail-content {
-  display: flex;; 
+.product-details {
+  display: flex;
+  align-items: flex-start; 
   justify-content: center;
   gap: 70px;
-  margin-bottom: 90px;
+  margin-bottom: 50px;
+  margin-top: 50px;
 }
 
-.notification {
-  background-color: #FFD2CB;
-  padding: 2px 30px;
-  border-radius: 30px;
-  max-width: 800px;
-  align-items: center; 
-  align-self: center; 
+.notification-container {
+  position: relative; 
+  width: 100%;        
   display: flex;
-  margin-bottom: 0px;
-  overflow: hidden;
+  justify-content: center; 
+  z-index: 1;
+}      
 
-  opacity: 0;
-  transform: translateY(-20px);
-  transition: opacity 0.5s ease, transform 0.5s ease; /* Add transition for smooth movement */
+/* Notification Styles */
+.notification {
+  position: absolute;   /* Absolute positioning keeps it from affecting layout */
+  top: -60px;            /* Start off-screen above */
+  background-color: #FFD2CB;
+  padding: 12px 30px;
+  border-radius: 30px;
+  width: 600px;
+  display: flex;
+  align-items: center;
+  opacity: 0;           
+  pointer-events: none;  /* Prevent interaction until visible */
+  transition: opacity 0.5s ease, top 0.5s ease; /* Smooth transition */
+  z-index: 1;       
 }
 
+/* Notification Visible State */
 .notification.visible {
-  opacity: 1; /* Fully visible */
-  transform: translateY(0); /* Slide into view */
-  margin-bottom: 40px;
-  pointer-events: auto;
+  opacity: 1;            /* Make the notification visible */
+  top: -30px;             /* Move it into view */
+  pointer-events: auto;  /* Allow interaction once visible */
 }
 
 .notification p {
   font-size: 14px;
   text-align: left;
+  margin: 0;   
 }
 
+/* Notification Icon Styling */
 .fa-regular.fa-bell {
   font-size: 20px;
-  object-fit: contain;
-  margin-right: 10px;
+  margin-right: 10px;    /* Space between icon and text */
 }
 
 .view-cart-button {
@@ -381,10 +396,10 @@ html {
   border-radius: 20px;
   font-size: 14px;
   font-weight: bold;
-  margin-left: auto;
+  margin-left: auto; 
+  cursor: pointer;
   transition: opacity 0.5s ease, transform 0.5s ease;
 }
-
 
 .view-cart-button:hover {
   border-color: #FFB947;
@@ -412,7 +427,6 @@ html {
 .product-details-carousel-images {
   display: flex;
   cursor: pointer;
-
   transition: transform 0.3s ease-in-out; /* Smooth transition for sliding */
 }
 
@@ -422,16 +436,6 @@ html {
   object-fit: cover;
 }
 
-.arrow-button {
-  opacity: 0; /* Hidden by default */
-  visibility: hidden; /* Hidden by default */
-  transition: opacity 0.3s ease, visibility 0.3s ease; /* Smooth transition */
-}
-
-.product-details-carousel:hover .arrow-button {
-  opacity: 1; /* Fully visible */
-  visibility: visible; /* Make them visible */
-}
 
 /* thumbnails */
 .carousel-thumbnails {
@@ -459,6 +463,9 @@ html {
 }
 
 .arrow-button {
+  opacity: 0; /* Hidden by default */
+  visibility: hidden; /* Hidden by default */
+  transition: opacity 0.3s ease, visibility 0.3s ease; /* Smooth transition */
   position: absolute;
   top: 50%;
   transform: translateY(-50%);
@@ -468,7 +475,6 @@ html {
   z-index: 1; 
   font-size: 20px;
 }
-
 
 .arrow-button.prev {
   left: 10px;
@@ -480,6 +486,11 @@ html {
 
 .arrow-button:hover {
   opacity: 0.8;
+}
+
+.product-details-carousel:hover .arrow-button {
+  opacity: 1; /* Fully visible */
+  visibility: visible; /* Make them visible */
 }
 
 /* Right Section (Product Info) */
@@ -1163,7 +1174,7 @@ html {
 /* Responsive */
 @media (max-width: 768px) {
   .container {
-    padding: 40px 10px;
+    padding: 20px;
   }
 
   /* Header */
@@ -1217,39 +1228,37 @@ html {
     margin-bottom: 0px;
   }
 
-  /* Bestsellers Section */
-  .heading-container h2 {
-    font-size: 30px;
+  /* product list Section */
+
+  .heading-container {
+    font-size: 35px;
     margin-bottom: 30px;
+
   }
 
   .products-container {
+    display: flex;
+    flex-wrap: wrap; /* Allows items to wrap to the next row */
+    gap: 10px; /* Space between items */
     padding: 0px 10px;
-    gap: 5px;
+
   }
 
   .product-card {
-    width: 45%;
-    height: auto;
+    flex: 0 0 48%; /* Each product card takes 48% of the container width */
+    margin-bottom: 10px; /* Adds space between rows */
+    box-sizing: border-box; /* Includes padding and border in the width */
   }
 
   .product-image-container {
-    height: auto;
-    width: 100%;
+    width: 100%; /* Full width for the image */
+    height: 160px; /* Fixed height for the image */
   }
-
-  .product-name .product-price{
-    font-size: 14px;
-  }
-
-  .product-subname {
-    font-size: 12px;
-  }
+  
 
   /* Product details section */
   .product-details-carousel {
     width: 100%;
-    
   }
   .product-details-section {
     display: flex;

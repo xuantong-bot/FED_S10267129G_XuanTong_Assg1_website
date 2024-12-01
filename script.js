@@ -420,7 +420,7 @@ function renderCheckoutSummary() {
   updateCheckoutTotal();
 }
 
-// f: setup cart functions
+// f: setup cart functions (quantity, add to cart)
 function setupCartFunctions(product) {
   const addToCartButton = document.getElementById("add-to-cart");
   const incrementButton = document.getElementById("increment");
@@ -625,23 +625,26 @@ function changeSlide(index) {
   currentIndex = index; // Update the global index
 }
 
+// f: prev slide for carousel
 function prevSlide(length) {
   currentIndex = (currentIndex - 1 + length) % length; // Wrap around
   changeSlide(currentIndex);
 }
 
+// f: next slide for carousel
 function nextSlide(length) {
   currentIndex = (currentIndex + 1) % length; // Wrap around
   changeSlide(currentIndex);
 }
 
+// f: highlight thumbnail for carousel
 function highlightThumbnail(index) {
   const thumbnails = document.querySelectorAll(".thumbnail");
   thumbnails.forEach((thumb) => thumb.classList.remove("active-thumbnail"));
   thumbnails[index].classList.add("active-thumbnail");
 }
 
-// Filter function to handle sorting
+// f: handle price sorting
 function filterProductsByPrice(order, category) {
   const selectedProducts = Object.keys(products).map(key => products[key])
     .filter(product => product.category.includes(category) || product.category === category);

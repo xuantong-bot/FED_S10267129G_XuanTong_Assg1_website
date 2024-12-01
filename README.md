@@ -18,6 +18,7 @@ The layout and structure of the site were planned using Figma, where I created w
 
 ### Design Tools:
 Figma: Used to create wireframes and design mockups for the website’s layout and interface.
+Figma Link: https://www.figma.com/design/eX4sD1qJYqJKKcQuaBmqMZ/FED_S10267129G_XuanTong_Assg1_wireframe?node-id=0-1&t=R1lZLri8Vv20FXWT-1
 
 ## Features
 ### Existing Features:
@@ -80,6 +81,7 @@ Figma: Used to create wireframes and design mockups for the website’s layout a
 
 ### Media
 * Product images for scrunchies were taken by me.
+* Logo was made using canva by me.
 * Icons used in the website are from Font Awesome.
 * Images for keychains and bouquets were sourced from online:
   * flower-power (keychain): https://images.app.goo.gl/fCpdYz5V8ssgk6PTA

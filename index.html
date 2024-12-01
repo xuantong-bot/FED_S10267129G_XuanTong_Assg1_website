@@ -6,9 +6,10 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Hooked on Loops</title>
   <link href="https://fonts.googleapis.com/css2?family=Comfortaa:wght@400;700&family=Nunito:wght@400;700&display=swap"
-    rel="stylesheet">
-  <script src="https://kit.fontawesome.com/c0e5014365.js" crossorigin="anonymous"></script>
+      rel="stylesheet">
+  <link rel="stylesheet" href="normalize.css">
   <link rel="stylesheet" href="style.css">
+  <script src="https://kit.fontawesome.com/c0e5014365.js" crossorigin="anonymous"></script>
 </head>
 
 <body onload="renderProductList('bestsellers')"> <!-- Call the function on page load -->
@@ -58,7 +59,7 @@
       <div class="container">
 
         <div class="split">
-          <img src="images/crochet gif.gif" alt="crochet.gif" class="hero-image">
+          <img src="images/crochet-gif.gif" alt="crochet.gif" class="hero-image">
         </div>
 
         <div class="split">
@@ -72,15 +73,13 @@
     </section>
 
     <!-- Bestsellers -->
-    <main>
-      <section class="product-list-section">
-        <div class="container" id="product-list-container">
-          <!-- The heading will be dynamically added here -->
-          <div class="products-container" id="products-container"></div>
-
-        </div>
-      </section>
-    </main>
+    <section class="product-list-section">
+      <div class="container" id="product-list-container">
+        <!-- Default heading added as a fallback -->
+        <h2 class="section-heading">Products</h2>
+        <div class="products-container" id="products-container"></div>
+      </div>
+    </section>
 
     <!-- About Section -->
     <our-story class="about-section" id="our-story">
@@ -94,7 +93,7 @@
         <div class="story-container">
           <!-- Image side -->
           <div class="split">
-            <img src="images/story image.jpg" alt="story image" class="story-image">
+            <img src="images/story-image.jpg" alt="story image" class="story-image">
           </div>
 
           <!-- Text side -->
@@ -153,8 +152,6 @@
 
     </div>
   </footer>
-
+  <script src="script.js"></script>
 </body>
-<script src="script.js"></script>
-
 </html>

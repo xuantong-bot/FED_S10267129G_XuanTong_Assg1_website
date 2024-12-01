@@ -1,6 +1,3 @@
-/*Normalize CSS*/
-@import url('normalize.css'); 
-
 /* General */
 * {
   box-sizing: border-box; 
@@ -38,17 +35,16 @@ html {
   margin: 0 auto;
   padding: 50px 20px;
   overflow-x: hidden;
-  margin-bottom: 50px;
 }
 
 /* Header */
 .header {
   display: flex; 
   justify-content: space-between;
-  align-items: center;
   background-color: #FFECC3;
   position: relative; 
   height: 100px;
+  align-items: center;
 }
 
 .logo {
@@ -376,7 +372,6 @@ html {
 .notification.visible {
   opacity: 1;            /* Make the notification visible */
   top: -30px;            /* Move it into view */
-  pointer-events: auto;  /* Allow interaction once visible */
 }
 
 .notification p {
@@ -388,7 +383,6 @@ html {
   background-color: #FFB947;
   color: #5D3F30;
   border: 1.5px solid #5D3F30;
-  align-self: right;
   text-decoration: none;
   padding: 5px 20px;
   border-radius: 20px;
@@ -428,7 +422,6 @@ html {
   display: flex;
   gap: 20px;
   margin: 0 auto; /* Center the carousel */
-  border-color: 1.5px solid aquamarine;
 }
 
 .product-details-carousel-images {
@@ -829,8 +822,6 @@ html {
 
 .country-select-container select {
   appearance: none;
-  -moz-appearance: none;
-  -webkit-appearance: none;
   border: none;
   border-radius: 30px;
   padding: 15px;
@@ -1009,7 +1000,6 @@ html {
 
 .checkbox-section a {
   color: #D95757;
-  word-break: break-word; /* Ensure links break to the next line if too long */
 }
 
 .checkbox-section a:hover {

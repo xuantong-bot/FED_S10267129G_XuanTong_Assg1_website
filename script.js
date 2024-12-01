@@ -194,8 +194,6 @@ function renderProductList(category, filteredProducts = null) {
     });
   }
 
-
-
   // display a message if no products are found
   if (selectedProducts.length === 0) {
     const noProductsMessage = document.createElement('p');
@@ -617,7 +615,7 @@ function setupCarousel(images) {
   });
 }
 
-// f: change slide (carousel)
+// f: change slide sliding effect for carousel
 function changeSlide(index) {
   const images = document.querySelectorAll("#carousel-images img");
   const offset = index * -100; // Calculate translation

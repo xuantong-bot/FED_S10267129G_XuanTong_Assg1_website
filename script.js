@@ -4,7 +4,7 @@ const products = {
     id: "s-green-pea",
     name: "green pea",
     subname: "scrunchie",
-    price: 6.00, 
+    price: 6.00,
     description: "A beautiful green pea scrunchie made from soft cotton fabric, perfect for your hair accessories collection.",
     category: ["shop-all", "scrunchies", "bestsellers"],
     images: ["scrunchies/green-pea.jpg", "scrunchies/green-pea2.jpg", "scrunchies/green-pea3.jpg"]
@@ -104,11 +104,11 @@ document.addEventListener("DOMContentLoaded", () => {
   // Only render checkout summary if on checkout page
   if (document.getElementById("checkout-summary")) {
     renderCheckoutSummary();
-  } 
+  }
 });
 
 
-// Helper functions for DOM manipulation
+// f: helper for DOM manipulation
 function createElement(tag, options = {}) {
   const { src, alt, style, classList, textContent } = options;
   const element = document.createElement(tag);
@@ -125,15 +125,22 @@ function createElement(tag, options = {}) {
 // f: render products list
 function renderProductList(category, filteredProducts = null) {
   const container = document.getElementById("product-list-container"); // Main container
-
+  const formattedCategory = category.replace(/-/g, ' ');  // Replace all dashes with spaces
   // clear container for re-rendering
   container.innerHTML = '';
 
   // heading
-  const headingContainer = document.createElement('h2');
-  headingContainer.classList.add('heading-container');
-  headingContainer.textContent = category.replace(/-/g, ' '); // Replace dashes with spaces
-  container.appendChild(headingContainer);
+  const sectionHeading = document.createElement('h2');
+  sectionHeading.textContent = formattedCategory;
+  sectionHeading.classList.add('heading-container');
+  // Create the anchor element
+  const headingLink = document.createElement('a');
+  headingLink.href = `product-list.html?category=${category}`; // Set the link to the appropriate page
+  // Append the heading to the anchor
+  headingLink.appendChild(sectionHeading);
+  // Append the anchor to the container
+  container.appendChild(headingLink);
+
 
   // create + append the filter dropdown
   const filterContainer = document.createElement('div');
@@ -179,7 +186,7 @@ function renderProductList(category, filteredProducts = null) {
     // Loop through all products
     Object.keys(products).forEach(key => {
       const product = products[key];
-  
+
       // check if the category array contains the selected category
       if (product.category.includes(category)) {
         selectedProducts.push(product);
@@ -188,7 +195,7 @@ function renderProductList(category, filteredProducts = null) {
   }
 
 
-  
+
   // display a message if no products are found
   if (selectedProducts.length === 0) {
     const noProductsMessage = document.createElement('p');
@@ -235,7 +242,6 @@ function renderProductList(category, filteredProducts = null) {
     productsContainer.appendChild(productCard);
   });
 }
-
 
 // f: render cart items
 function renderCartItems() {
@@ -300,7 +306,7 @@ function renderCartItems() {
     incrementButton.textContent = "+";
     incrementButton.classList.add("increment");
 
-    
+
     quantityControls.appendChild(decrementButton);
     quantityControls.appendChild(quantityDisplay);
     quantityControls.appendChild(incrementButton);
@@ -335,7 +341,7 @@ function renderCartItems() {
       if (item.quantity > 1) {
         item.quantity--;
         quantityDisplay.textContent = item.quantity;
-        localStorage.setItem("cart", JSON.stringify(cart)); 
+        localStorage.setItem("cart", JSON.stringify(cart));
         updateCartNotification();
         updateCartTotal();
       }
@@ -446,7 +452,7 @@ function setupCartFunctions(product) {
 // f: add to cart
 function addToCart(productId, quantity) {
   const product = products[productId];  // Fetch product using productId as key
-  
+
   if (product) {
     const cartItem = {
       ...product,  // Copy product data
@@ -455,7 +461,7 @@ function addToCart(productId, quantity) {
 
     // Check if product already exists in cart
     const existingItem = cart.find(item => item.id === productId);
-    
+
     if (existingItem) {
       // Update the quantity if the item already exists
       existingItem.quantity += cartItem.quantity;
@@ -479,7 +485,7 @@ function updateCartTotal() {
   const subtotalElement = document.getElementById("subtotal");
   const discountElement = document.getElementById("discount");
   const totalElement = document.getElementById("total");
-  
+
   let subtotal = 0;
 
   cart.forEach(item => {
@@ -553,7 +559,7 @@ function updateCartNotification() {
 // f: show notification in product.html
 function showCartNotification(product, quantity) {
   const notification = document.querySelector(".notification");
-  const body = document.body; 
+  const body = document.body;
   const notificationContainer = document.querySelector(".notification-container");  // To find the notification container
 
   if (notification.classList.contains("visible")) {
@@ -564,7 +570,7 @@ function showCartNotification(product, quantity) {
   notification.classList.add("visible");
 
   window.scrollTo({
-    top: 0,  
+    top: 0,
     behavior: "smooth"
   });
 

@@ -70,6 +70,8 @@ Figma: Used to create wireframes and design mockups for the website’s layout a
 
 * The "Add to Cart" notification is not working fully properly on certain mobile screen sizes, as it may get cut off slightly in some cases.
 
+* Checkout page can still be accessed even when cart is empty.
+
 * The checkout page is not fully functional, with limitations in handling payment processing and order confirmation due to the lack of a secure database.
 
 ## Credits

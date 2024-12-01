@@ -33,7 +33,6 @@ html {
 .container {
   display: flex;
   flex-direction: column;
-  justify-content: center;
   max-width: 100%;
   width: 100%;
   margin: 0 auto;
@@ -167,7 +166,7 @@ html {
 .hero-section .container {
   display: flex;
   flex-wrap: wrap;
-  align-items: center;
+  align-items: center; 
   padding: 20px 50px;
   flex-direction: row;
 }
@@ -232,59 +231,55 @@ html {
   padding: 15px 10px;
 }
 
-/* Container for the filter dropdown */
+/* Filter container */
 .filter-container {
+  margin-top: 20px;
+  margin-bottom: 30px;
   display: flex;
-  padding: 10px 20px;
-  margin-bottom: 10px;
-  justify-content: flex-end; 
+  justify-content: flex-start; 
+  padding: 0px 50px;
+  flex-wrap: wrap;
+  box-sizing: border-box;
+  max-width: 100%;
+  overflow-x: auto; /* Allows horizontal scrolling if necessary */
 }
 
-/* Dropdown styling */
+/* Style the dropdown */
 .price-filter-dropdown {
-  padding: 8px 12px;
-  border: 1px solid #ccc;
-  border-radius: 5px;
-  font-size: 14px;
-  background-color: #fff;
+  padding: 10px;
+  font-size: 16px;
+  font-weight: bold;
+  color: #5D3F30;
+  border: 1.5px solid #5D3F30;
+  background-color: #FFECC3;
+  border-radius: 10px;
   cursor: pointer;
-  outline: none;
-  transition: border-color 0.3s ease, box-shadow 0.3s ease;
+  max-width: 100%;
+  width: 200px; /* Adjust width as needed */
+  box-sizing: border-box;
+  transition: transform 0.3s ease, filter 0.3s ease; /* Smooth hover effect */
 }
 
+/* Add some spacing between the label and dropdown */
+.filter-container label {
+  margin-right: 10px;
+}
+
+/* Hover effect for the dropdown */
+.price-filter-dropdown:hover {
+  border-color: #FFECC3;
+  transform: scale(1.05)
+}
+
+/* Focus effect */
 .price-filter-dropdown:focus {
-  border-color: #ff6f61; /* Highlight border color */
-  box-shadow: 0 0 5px rgba(255, 111, 97, 0.5);
-}
-
-/* Styling for buttons (if using buttons instead of a dropdown) */
-.filter-button {
-  padding: 8px 16px;
-  margin-left: 10px;
-  background-color: #ff6f61;
-  color: white;
-  border: none;
-  border-radius: 5px;
-  font-size: 14px;
-  cursor: pointer;
-  transition: background-color 0.3s ease, transform 0.2s ease;
-}
-
-.filter-button:hover {
-  background-color: #e65b55;
-  transform: scale(1.05);
-}
-
-.filter-button:active {
-  transform: scale(1);
+  outline: none;
 }
 
 
 #product-list-container {
   display: flex;
   flex-direction: column;
-  justify-content: center;
-  align-items: center;
 }
 
 .products-container {
@@ -816,16 +811,19 @@ html {
   height: 100px; 
 }
 
-.select-input option{
+.country-select-container select option {
+  display: flex;
   font-weight: bold;
   background-color: #FFECC3;
   color: #5D3F30;
+  word-wrap: break-word;
 }
 
 .country-select-container {
   position: relative;
   display: inline-block;
   width: 100%;
+  box-sizing: border-box;
 }
 
 .country-select-container select {
@@ -837,9 +835,10 @@ html {
   padding: 15px;
   font-size: 14px;
   font-weight: bold;
-  width: 100%;
+  max-width: 100%;
   background: #FFECC3;
   color: #5D3F30;
+  box-sizing: border-box;
   cursor: pointer;
 }
 
@@ -855,6 +854,7 @@ html {
 
 .country-select-container select:focus {
   outline: none;
+  width: 100%;
   font-weight: bold;
   color: #5D3F30;
 }
@@ -889,7 +889,7 @@ html {
 
 .checkout-item {
   display: flex;
-  flex-wrap: nowrap;
+  flex-wrap: wrap;
   align-items: center;
   width: 100%;
   border-bottom: 1.5px solid #FFB947;
@@ -1187,8 +1187,8 @@ html {
 
   /* Header */
   .header {
-    height: 120px; /* Adjust header height */
-    padding: 0px 10px; /* Adjust padding */
+    height: auto; /* Adjust height for smaller screens */
+    padding: 5px 10px; /* Adjust padding */
   }
 
   .logo img{
@@ -1223,9 +1223,18 @@ html {
   }
 
   /* product list Section */
+  .filter-container {
+    padding: 0 10px; /* Reduce padding */
+  }
+
+  .price-filter-dropdown {
+    width: 40%; /* Adjust width */
+    font-size: 14px; /* Slightly smaller font */
+  }
+
   .products-container {
-    gap: 20px; /* Reduce gap between items */
-    padding: 0px 10px; /* Adjust padding for smaller screens */
+    gap: 30px; /* Reduce gap between items */
+    padding: 0px 10px; /* Adjust padding */
   }
 
   .product-card {
@@ -1258,13 +1267,12 @@ html {
 
   .add-to-cart-button {
     padding: 15px 40px; /* Adjust padding for tablets */
-    margin-left: 20px; /* Reduce margin for tablets */
     font-size: 14px; /* Reduce font size for tablets */
   }
 
   .notification {
     width: 100%;          /* Make the notification width responsive */
-    padding: 10px 20px;  /* Adjust padding for smaller screens */
+    padding: 10px 10px;    /* Adjust padding */
   }
 
   .notification p {
@@ -1288,6 +1296,13 @@ html {
     flex-direction: column;
     justify-content: center;
     align-items: center;
+    padding: 20px;
+  }
+
+  .cart-summary {
+    width: 100%;
+    padding: 20px 30px;
+    margin: 0;
   }
 
   .cart-notification {

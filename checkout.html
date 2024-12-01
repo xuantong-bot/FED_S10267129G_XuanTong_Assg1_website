@@ -55,13 +55,16 @@
           <h2>shipping address</h2>
           <form id="shipping-form" autocomplete="on">
             <div class="form-input-name">
-              <input type="text" class="form-input" placeholder="First Name *" autocomplete="given-name" required>
-              <input type="text" class="form-input" placeholder="Last Name *" autocomplete="family-name" required>
+              <input type="text" id="first-name" class="form-input" placeholder="first name *" autocomplete="given-name"
+                required>
+
+              <input type="text" name="last_name" class="form-input" placeholder="last name *"
+                autocomplete="family-name" required>
             </div>
 
             <div class="country-select-container">
-              <select class="form-input select-input" autocomplete="country" required>
-                <option value="" disabled selected>Country / Region *</option>
+              <select name="country" class="form-input select-input" autocomplete="country" required>
+                <option value="" disabled selected>country / region *</option>
                 <option value="SG">Singapore</option>
                 <option value="MY">Malaysia</option>
                 <option value="ID">Indonesia</option>
@@ -70,83 +73,94 @@
               <i class="fa-solid fa-chevron-down custom-arrow"></i>
             </div>
 
-            
             <div class="form-input-others">
-              <input type="text" class="form-input" placeholder="Street Address *" autocomplete="street-address" required>
-              <input type="text" class="form-input" placeholder="Postcode / ZIP *" autocomplete="postal-code" required>
-              <input type="email" class="form-input" placeholder="Email Address *" autocomplete="email" required>
-              <textarea class="form-input textarea-input" placeholder="Order Notes (optional)" autocomplete="off"></textarea>
+              <input type="text" id="street-address" class="form-input" placeholder="street address *"
+                autocomplete="street-address" required>
+
+              <input type="text" name="postcode" class="form-input" placeholder="postcode / zip *"
+                autocomplete="postal-code" required>
+
+              <input type="email" id="email" class="form-input" placeholder="email address *" autocomplete="email"
+                required>
+
+              <textarea name="order_notes" class="form-input textarea-input" placeholder="order notes (optional)"
+                autocomplete="off"></textarea>
             </div>
-          </form>         
+          </form>
+
         </div>
-    
+
         <!-- Checkout Summary Section -->
         <div class="checkout-right">
-            
-        <div id="checkout-summary" class="checkout-summary">
+
+          <div id="checkout-summary" class="checkout-summary">
             <div id="checkout-items">
               <!-- Product items will be dynamically inserted here -->
             </div>
 
             <div class="checkout-section">
               <div class="checkout-subprices">
-                <p><span class="checkout-label">subtotal:</span> <span id="subtotal" class="checkout-price">S$0.00</span></p>
-                <p><span class="checkout-label">shipping:</span> <span id="shipping" class="checkout-price">S$0.00</span></p>
+                <p><span class="checkout-label">subtotal:</span> <span id="subtotal"
+                    class="checkout-price">S$0.00</span></p>
+                <p><span class="checkout-label">shipping:</span> <span id="shipping"
+                    class="checkout-price">S$0.00</span></p>
               </div>
 
               <div class="checkout-total">
-                <p><span class="total-checkout-label">Total:</span> <span id="total" class="total-checkout-price">S$0.00</span></p>
+                <p><span class="total-checkout-label">Total:</span> <span id="total"
+                    class="total-checkout-price">S$0.00</span></p>
               </div>
             </div>
-            
-          <div class="payment-container">
-            <p>PayNow / PayLah!</p>
-            <div class="qr-code-container" id="qr-code-container">
-              
-              <div id="paynow-qr" class="qr-code">
-                <img src="images/paynow.jpg" alt="PayNow QR Code">
-              </div>
 
-              <div id="paylah-qr" class="qr-code">
-                <img src="images/paylah.jpg" alt="PayLah QR Code">
-              </div>
+            <div class="payment-container">
+              <p>PayNow / PayLah!</p>
+              <div class="qr-code-container" id="qr-code-container">
 
+                <div id="paynow-qr" class="qr-code">
+                  <img src="images/paynow.jpg" alt="PayNow QR Code">
+                </div>
+
+                <div id="paylah-qr" class="qr-code">
+                  <img src="images/paylah.jpg" alt="PayLah QR Code">
+                </div>
+
+              </div>
             </div>
+
+
+            <div class="checkbox-section">
+
+              <div class="checkout-label-container">
+                <label class="custom-checkbox">
+                  <input type="checkbox" id="receive-emails" required>
+                  <span class="checkbox-icon">
+                    <i class="far fa-square unchecked"></i>
+                    <i class="fas fa-check-square checked"></i>
+                  </span>
+                  <h4>I would like to receive email updates & news</h4>
+                </label>
+              </div>
+
+              <p>Your personal data will be used to process your order, support your experience throughout this website,
+                and for other purposes described in our <a href="#">privacy policy</a>.</p>
+
+              <div class="checkout-label-container">
+                <label class="custom-checkbox">
+                  <input type="checkbox" id="terms-conditions" required>
+                  <span class="checkbox-icon">
+                    <i class="far fa-square unchecked"></i>
+                    <i class="fas fa-check-square checked"></i>
+                  </span>
+                  <h4>I have read and agree to the <a href="#">terms and conditions</a></h4>
+                </label>
+              </div>
+            </div>
+            <a href="checkout.html" class="checkout-button">place order</a>
+
           </div>
-          
-
-        <div class="checkbox-section">
-
-          <div class="checkout-label-container">
-            <label class="custom-checkbox">
-              <input type="checkbox" id="receive-emails" required>
-              <span class="checkbox-icon">
-                <i class="far fa-square unchecked"></i>
-                <i class="fas fa-check-square checked"></i>
-              </span>
-              <h4>I would like to receive email updates & news</h4>
-            </label>
-          </div>
-
-          <p>Your personal data will be used to process your order, support your experience throughout this website, and for other purposes described in our <a href="#">privacy policy</a>.</p>
-
-          <div class="checkout-label-container">
-            <label class="custom-checkbox">
-              <input type="checkbox" id="terms-conditions" required>
-              <span class="checkbox-icon">
-                <i class="far fa-square unchecked"></i>
-                <i class="fas fa-check-square checked"></i>
-              </span>
-              <h4>I have read and agree to the <a href="#">terms and conditions</a></h4>
-            </label>
-          </div>
-      </div>
-      <a href="checkout.html" class="checkout-button">place order</a>
-
-      </div>
-    </div>
+        </div>
   </main>
-  
+
 
   <!-- Footer -->
   <footer class="footer" id="contact-us">
@@ -177,7 +191,7 @@
       </div>
     </div>
   </footer>
-  
+
   <script src="script.js"></script>
 </body>
 

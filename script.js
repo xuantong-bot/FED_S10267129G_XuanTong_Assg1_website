@@ -123,97 +123,89 @@ function createElement(tag, options = {}) {
 }
 
 // f: render products list
-function renderProductList(category) {
-  const formattedCategory = category.replace(/-/g, ' ');  // Replace all dashes with spaces
-  const container = document.getElementById("product-list-container");  // Reference the container div
+function renderProductList(category, filteredProducts = null) {
+  const container = document.getElementById("product-list-container"); // Main container
 
-  // Create and display the heading
-  const sectionHeading = document.createElement('h2');
-  sectionHeading.textContent = formattedCategory;
-  sectionHeading.classList.add('heading-container');
+  // clear container for re-rendering
+  container.innerHTML = '';
 
-  // Create the anchor element for the heading
-  const headingLink = document.createElement('a');
-  headingLink.href = `product-list.html?category=${category}`; // Set the link to the appropriate page
+  // heading
+  const headingContainer = document.createElement('h2');
+  headingContainer.classList.add('heading-container');
+  headingContainer.textContent = category.replace(/-/g, ' '); // Replace dashes with spaces
+  container.appendChild(headingContainer);
 
-  // Append the heading to the anchor
-  headingLink.appendChild(sectionHeading);
-
-  // Append the anchor to the container
-  container.appendChild(headingLink);
-
+  // create + append the filter dropdown
   const filterContainer = document.createElement('div');
   filterContainer.classList.add('filter-container');
-  
+
   const priceFilterDropdown = document.createElement('select');
   priceFilterDropdown.classList.add('price-filter-dropdown');
   priceFilterDropdown.id = 'priceFilter';
-  
-  // Create and append option elements without innerHTML
-  const defaultOption = document.createElement('option');
-  defaultOption.value = 'default';
-  defaultOption.textContent = 'sort by price';
-  priceFilterDropdown.appendChild(defaultOption);
 
-  const lowToHighOption = document.createElement('option');
-  lowToHighOption.value = 'low-to-high';
-  lowToHighOption.textContent = 'lowest to highest';
-  priceFilterDropdown.appendChild(lowToHighOption);
+  // dropdown options
+  const options = [
+    { value: 'default', text: 'sort by price' },
+    { value: 'low-to-high', text: 'lowest to highest' },
+    { value: 'high-to-low', text: 'highest to lowest' }
+  ];
 
-  const highToLowOption = document.createElement('option');
-  highToLowOption.value = 'high-to-low';
-  highToLowOption.textContent = 'highest to lowest';
-  priceFilterDropdown.appendChild(highToLowOption);
-  
-  // Event listener for filter change
+  // add options to the dropdown
+  options.forEach(optionData => {
+    const option = document.createElement('option');
+    option.value = optionData.value;
+    option.textContent = optionData.text;
+    priceFilterDropdown.appendChild(option);
+  });
+
+  // add event listener for price filtering
   priceFilterDropdown.addEventListener('change', () => {
-    filterProductsByPrice(priceFilterDropdown.value);
+    const filterValue = priceFilterDropdown.value;
+    filterProductsByPrice(filterValue, category);
   });
 
   filterContainer.appendChild(priceFilterDropdown);
-  container.appendChild(filterContainer);  // Append the filter below the heading
+  container.appendChild(filterContainer);
 
-  // Get the products container to load products
+
+  // Create a container for products
   const productsContainer = document.createElement('div');
   productsContainer.classList.add('products-container');
   container.appendChild(productsContainer);
 
-  // Create a document fragment for better performance
-  const fragment = document.createDocumentFragment();
-
-  // Loop through the products in the selected category
-  const selectedProducts = [];
-  Object.keys(products).forEach(key => {
-    const product = products[key];
-    if (Array.isArray(product.category)) {
+  // Determine which products to render
+  const selectedProducts = filteredProducts || [];
+  if (!filteredProducts) {
+    // Loop through all products
+    Object.keys(products).forEach(key => {
+      const product = products[key];
+  
+      // check if the category array contains the selected category
       if (product.category.includes(category)) {
         selectedProducts.push(product);
       }
-    } else if (product.category === category) {
-      selectedProducts.push(product);
-    }
-  });
+    });
+  }
 
-  // Handle case when no products are found
+
+  
+  // display a message if no products are found
   if (selectedProducts.length === 0) {
     const noProductsMessage = document.createElement('p');
-    noProductsMessage.textContent = 'No products found in this category.';
+    noProductsMessage.textContent = 'No products found.';
     productsContainer.appendChild(noProductsMessage);
     return;
   }
 
-  // Loop to create product cards
+  // Render the selected products
   selectedProducts.forEach(product => {
-    // Create product card container
     const productCard = document.createElement('div');
     productCard.classList.add('product-card');
-    
-    // Create product link
+
     const productLink = document.createElement('a');
     productLink.href = `product.html?id=${product.id}`;
     productLink.classList.add('product-link');
-    
-    // Create image container and image element
+
     const productImageContainer = document.createElement('div');
     productImageContainer.classList.add('product-image-container');
     const productImage = document.createElement('img');
@@ -221,8 +213,7 @@ function renderProductList(category) {
     productImage.alt = product.name;
     productImage.classList.add('product-image');
     productImageContainer.appendChild(productImage);
-    
-    // Create product name element
+
     const productName = document.createElement('p');
     productName.classList.add('product-name');
     productName.textContent = product.name;
@@ -230,27 +221,19 @@ function renderProductList(category) {
     const productSubname = document.createElement('p');
     productSubname.classList.add('product-subname');
     productSubname.textContent = product.subname;
-    
-    // Create product price element
+
     const productPrice = document.createElement('p');
     productPrice.classList.add('product-price');
     productPrice.textContent = `S$${product.price.toFixed(2)}`;
-    
-    // Append all elements to the product link
+
     productLink.appendChild(productImageContainer);
     productLink.appendChild(productName);
-    productLink.appendChild(productSubname);  // Optional, if you want to show subname
+    productLink.appendChild(productSubname);
     productLink.appendChild(productPrice);
-    
-    // Append the product link to the product card
     productCard.appendChild(productLink);
-    
-    // Append the product card to the document fragment
-    fragment.appendChild(productCard);
-  });
 
-  // Append the fragment to the products container (this appends all at once)
-  productsContainer.appendChild(fragment);
+    productsContainer.appendChild(productCard);
+  });
 }
 
 
@@ -654,5 +637,20 @@ function highlightThumbnail(index) {
   thumbnails[index].classList.add("active-thumbnail");
 }
 
+// Filter function to handle sorting
+function filterProductsByPrice(order, category) {
+  const selectedProducts = Object.keys(products).map(key => products[key])
+    .filter(product => product.category.includes(category) || product.category === category);
+
+  // Sort products based on selected order
+  if (order === 'low-to-high') {
+    selectedProducts.sort((a, b) => a.price - b.price);
+  } else if (order === 'high-to-low') {
+    selectedProducts.sort((a, b) => b.price - a.price);
+  }
+
+  // Re-render the products with the sorted order
+  renderProductList(category, selectedProducts);
+}
 
 console.log("script.js loaded");

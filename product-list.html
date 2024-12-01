@@ -1,86 +1,90 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Hooked on Loops</title>
-  <link href="https://fonts.googleapis.com/css2?family=Comfortaa:wght@400;700&family=Nunito:wght@400;700&display=swap" rel="stylesheet">
-  <script src="https://kit.fontawesome.com/c0e5014365.js" crossorigin="anonymous"></script>
-  <link rel="stylesheet" href="style.css">
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Hooked on Loops</title>
+    <link href="https://fonts.googleapis.com/css2?family=Comfortaa:wght@400;700&family=Nunito:wght@400;700&display=swap"
+        rel="stylesheet">
+    <script src="https://kit.fontawesome.com/c0e5014365.js" crossorigin="anonymous"></script>
+    <link rel="stylesheet" href="style.css">
 </head>
+
 <body>
-  <!-- Header -->
-  <header class="header">
-    <div class="container">
-      <a href="index.html" class="logo-link">
-        <img src="images/logo.png" alt="Logo" class="logo">
-      </a>
+    <!-- Header -->
+    <header class="header">
+        <div class="container">
+            <a href="index.html" class="logo-link">
+                <img src="images/logo.png" alt="Logo" class="logo">
+            </a>
 
-      <div class="cart-menu">
-        <a href="cart.html" class="cart-icon-link">
-          <i class="fa-solid fa-cart-shopping"></i>
-        </a>
+            <div class="cart-menu">
+                <a href="cart.html" class="cart-icon-link">
+                    <i class="fa-solid fa-cart-shopping"></i>
+                </a>
 
-        <!-- Notification element -->
-        <div id="cart-notification" class="cart-notification">
-          <span id="cart-count">0</span>
+                <!-- Notification element -->
+                <div id="cart-notification" class="cart-notification">
+                    <span id="cart-count">0</span>
+                </div>
+
+                <div class="menu-dropdown">
+                    <a href="#" class="menu-icon-link">
+                        <i class="fa-solid fa-bars"></i>
+                    </a>
+                    <div class="dropdown-content">
+                        <a href="product-list.html?category=shop-all" class="menu-link">shop all</a>
+                        <a href="product-list.html?category=bestsellers" class="menu-link">bestsellers</a>
+                        <a href="product-list.html?category=scrunchies" class="menu-link">scrunchies</a>
+                        <a href="product-list.html?category=keychains" class="menu-link">keychains</a>
+                        <a href="product-list.html?category=bouquets" class="menu-link">bouquets</a>
+                        <a href="index.html#our-story" class="menu-link">our story</a>
+                        <a href="#contact-us" class="menu-link">contact us</a>
+                    </div>
+                </div>
+            </div>
         </div>
+    </header>
 
-        <div class="menu-dropdown">
-          <a href="#" class="menu-icon-link">
-            <i class="fa-solid fa-bars"></i>
-          </a>
-          <div class="dropdown-content">
-            <a href="product-list.html?category=shop-all" class="menu-link">shop all</a>
-            <a href="product-list.html?category=bestsellers" class="menu-link">bestsellers</a>
-            <a href="product-list.html?category=scrunchies" class="menu-link">scrunchies</a>
-            <a href="product-list.html?category=keychains" class="menu-link">keychains</a>
-            <a href="product-list.html?category=bouquets" class="menu-link">bouquets</a>
-            <a href="index.html#our-story" class="menu-link">our story</a>
-            <a href="#contact-us" class="menu-link">contact us</a>
-          </div>
+    <!-- Main Content -->
+    <main>
+        <section class="product-list-section">
+            <div class="container" id="product-list-container">
+                <!-- The heading will be dynamically added here -->
+                <div class="products-container" id="products-container">
+                </div>
+            </div>
+        </section>
+    </main>
+
+
+    <!-- Footer -->
+    <footer class="footer" id="contact-us">
+        <div class="container">
+            <div class="footer-social">
+                <a href="https://twitter.com" target="_blank" class="social-icon">
+                    <i class="fa-brands fa-twitter"></i>
+                </a>
+                <a href="https://instagram.com" target="_blank" class="social-icon">
+                    <i class="fa-brands fa-instagram"></i>
+                </a>
+            </div>
+
+            <div class="footer-links">
+                <ul>
+                    <li><a href="product-list.html?category=shop-all">shop all</a></li>
+                    <li><a href="product-list.html?category=bestsellers">bestsellers</a></li>
+                    <li><a href="product-list.html?category=scrunchies">scrunchies</a></li>
+                    <li><a href="product-list.html?category=keychains">keychains</a></li>
+                    <li><a href="product-list.html?category=bouquets">bouquets</a></li>
+                    <li><a href="index.html#our-story">our story</a></li>
+                </ul>
+            </div>
         </div>
-      </div>
-    </div>
-  </header>
+    </footer>
 
-  <!-- Main Content -->
-  <main>
-    <section class="product-list-section">          
-      <div class="container" id="product-list-container">
-        <!-- The heading will be dynamically added here -->
-        <div class="products-container" id="products-container">
-        </div> 
-      </div>
-    </section>
-  </main>
-  
-
-  <!-- Footer -->
-  <footer class="footer" id="contact-us">
-    <div class="container">
-      <div class="footer-social">
-        <a href="https://twitter.com" target="_blank" class="social-icon">
-          <i class="fa-brands fa-twitter"></i>
-        </a>
-        <a href="https://instagram.com" target="_blank" class="social-icon">
-          <i class="fa-brands fa-instagram"></i>
-        </a>
-      </div>
-
-      <div class="footer-links">
-        <ul>
-          <li><a href="product-list.html?category=shop-all">shop all</a></li>
-          <li><a href="product-list.html?category=bestsellers">bestsellers</a></li>
-          <li><a href="product-list.html?category=scrunchies">scrunchies</a></li>
-          <li><a href="product-list.html?category=keychains">keychains</a></li>
-          <li><a href="product-list.html?category=bouquets">bouquets</a></li>
-          <li><a href="index.html#our-story">our story</a></li>
-        </ul>
-      </div>
-    </div>
-  </footer>
-
-  <script src="script.js"></script>
+    <script src="script.js"></script>
 </body>
+
 </html>
